@@ -35,6 +35,7 @@ $routes->get('/', 'Home::index', ['filter' => 'userNoAuth']);
 $routes->match(['get', 'post'], 'login', 'Authentication::login', ['filter' => 'userNoAuth']);
 $routes->get('logout', 'Authentication::logout');
 
+// Dashboard
 $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'userAuth']);
 
 // Map
