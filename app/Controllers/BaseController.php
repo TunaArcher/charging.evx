@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['array', 'custom_helper', 'my_hashids', 'employee_logger'];
+    protected $helpers = ['array', 'custom_helper', 'my_hashids', 'user_logger'];
 
     /**
      * Constructor.

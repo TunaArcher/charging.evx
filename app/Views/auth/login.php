@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-bs-theme="dark" data-color-theme="Blue_Theme" data-layout="vertical">
+<html lang="en" dir="ltr" data-bs-theme="dark" data-color-theme="Cyan_Theme" data-layout="vertical">
 
 <head>
   <!-- Required meta tags -->
@@ -8,12 +8,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="<?php echo base_url('/assets/images/logos/logo.png'); ?>" />
 
   <!-- Core Css -->
-  <link rel="stylesheet" href="../assets/css/styles.css" />
-
+  <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
   <title>EVX</title>
+  <style>
+    /** BASE **/
+    * {
+      font-family: 'Kanit', sans-serif;
+    }
+    .auth-bg {
+      background: url('https://cdn.whichcar.com.au/assets/p_4x3/13f31229/evx-kerbside-charger-nsw-3.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+  <script>
+    var serverUrl = '<?php echo base_url(); ?>'
+  </script>
 </head>
 
 <body>
@@ -41,13 +56,13 @@
                         <h2 class="lh-base mb-4">Let's get you signed in</h2>
                         <div class="row">
                           <div class="col-6 mb-2 mb-sm-0">
-                            <a class="btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="javascript:void(0)" role="button">
+                            <a class="disabled btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="javascript:void(0)" role="button">
                               <img src="../assets/images/svgs/facebook-icon.svg" alt="matdash-img" class="img-fluid me-2" width="18" height="18">
                               <span class="d-none d-xxl-inline-flex"> Sign in with </span>&nbsp; Facebook
                             </a>
                           </div>
                           <div class="col-6">
-                            <a class="btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="javascript:void(0)" role="button">
+                            <a class="disabled btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="javascript:void(0)" role="button">
                               <img src="../assets/images/svgs/google-icon.svg" alt="matdash-img" class="img-fluid me-2" width="18" height="18">
                               <span class="d-none d-xxl-inline-flex"> Sign in with </span>&nbsp; Google
                             </a>
@@ -60,18 +75,18 @@
                           </p>
                           <span class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                         </div>
-                        <form>
+                        <form id="loginForm" method="post">
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email" aria-describedby="emailHelp">
+                            <input name="username" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email" aria-describedby="emailHelp">
                           </div>
                           <div class="mb-4">
                             <div class="d-flex align-items-center justify-content-between">
                               <label for="exampleInputPassword1" class="form-label">Password</label>
-                              <a class="text-primary link-dark fs-2" href="../dark/authentication-forgot-password2.html">Forgot
+                              <a class="text-primary link-dark fs-2" href="">Forgot
                                 Password ?</a>
                             </div>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your password">
+                            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your password">
                           </div>
                           <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="form-check">
@@ -81,11 +96,11 @@
                               </label>
                             </div>
                           </div>
-                          <a href="../dark/index.html" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Sign In</a>
-                          <div class="d-flex align-items-center">
+                          <button id="btn-login" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Sign In</button>
+                          <!-- <div class="d-flex align-items-center">
                             <p class="fs-12 mb-0 fw-medium">Don’t have an account yet?</p>
-                            <a class="text-primary fw-semibold ms-2" href="../dark/authentication-register2.html">Sign Up Now</a>
-                          </div>
+                            <a class="text-primary fw-semibold ms-2" href="<?php echo base_url('register'); ?>">Sign Up Now</a>
+                          </div> -->
                         </form>
                       </div>
                     </div>
@@ -105,14 +120,82 @@
   </div>
   <div class="dark-transparent sidebartoggler"></div>
   <!-- Import Js Files -->
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
-  <script src="../assets/js/theme/app.dark.init.js"></script>
-  <script src="../assets/js/theme/theme.js"></script>
-  <script src="../assets/js/theme/app.min.js"></script>
+  <script src="<?php echo base_url('/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js'); ?>"></script>
+  <script src="<?php echo base_url('/assets/libs/simplebar/dist/simplebar.min.js'); ?>"></script>
+  <script src="<?php echo base_url('/assets/js/theme/app.dark.init.js'); ?>"></script>
+  <script src="<?php echo base_url('/assets/js/theme/theme.js'); ?>"></script>
+  <script src="<?php echo base_url('/assets/js/theme/app.min.js'); ?>"></script>
 
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+      $('#btn-login').on('click', function(e) {
+        e.preventDefault()
+        const $btnLogin = $(this)
+
+        $btnLogin.prop('disabled', true)
+
+        let username = $('input[name="username"]').val()
+        let password = $('input[name="password"]').val()
+
+        let dataObj = {
+          username,
+          password
+        }
+
+        $.ajax({
+          type: 'POST',
+          url: `${serverUrl}/login`,
+          contentType: 'application/json; charset=utf-8;',
+          processData: false,
+          data: JSON.stringify(dataObj),
+          success: function(res) {
+            if (res.success === 1) {
+
+              $btnLogin.prop('disabled', false)
+
+              Swal.fire({
+                icon: 'success',
+                text: `${res.message}`,
+                timer: '2000',
+                heightAuto: false
+              });
+
+              window.location.href = res.redirect_to;
+            } else {
+              $btnLogin.prop('disabled', false)
+            }
+          },
+          error: function(res) {
+
+            $btnLogin.prop('disabled', false)
+
+            Swal.fire({
+              icon: 'error',
+              title: 'ไม่สามารถเข้าสู่ระบบได้',
+              text: `${res.responseJSON.message}`,
+              timer: '2000',
+              heightAuto: false
+            });
+          }
+        })
+
+      });
+      $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+          input.attr("type", "text");
+        } else {
+          input.attr("type", "password");
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

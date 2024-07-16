@@ -35,10 +35,7 @@ $routes->get('/', 'Home::index', ['filter' => 'userNoAuth']);
 $routes->match(['get', 'post'], 'login', 'Authentication::login', ['filter' => 'userNoAuth']);
 $routes->get('logout', 'Authentication::logout');
 
-// Dashboard
-$routes->group('dashboard', ['filter' => 'userAuth'], function ($routes) {
-    $routes->get('index', 'Dashboard::index');
-});
+$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'userAuth']);
 
 // Map
 $routes->group('map', ['filter' => 'userAuth'], function ($routes) {

@@ -15,6 +15,35 @@ class Authentication extends BaseController
 
         try {
 
+            // ============================================== TEST
+            
+            $userID = 2;
+            $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
+            $userloginDetailID = $UserLoginDetailModel->insertuserLoginDetail([
+                'user_id' => $userID
+            ]);
+
+            session()->set([
+                'userID' => $userID,
+                'username' => 'user',
+                'thumbnail' => '',
+                'isUserLoggedIn' => true,
+                'login_detail_id' => $userloginDetailID
+            ]);
+
+            $status = 200;
+            $response['success'] = 1;
+            $response['message'] = 'เข้าสู่ระบบสำเร็จ';
+
+            $response['redirect_to'] = base_url('/charging/index');
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+            // ============================================== TEST
+
+            
             if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
 
             $UserModel = new \App\Models\UserModel();
@@ -88,9 +117,11 @@ class Authentication extends BaseController
     public function logout()
     {
         try {
+
             $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
             $UserLoginDetailModel->updateUserLoginDetailByID(session()->get('login_detail_id'), ['active' => '0']);
 
+          
             logger_store([
                 'user_id' => session()->get('userID'),
                 'username' => session()->get('username'),

@@ -3,13 +3,13 @@ function logger_store($data)
 {
 	$db = \Config\Database::connect();
 
-	$builder = $db->table('employee_logs');
+	$builder = $db->table('user_logs');
 
 	$builder->insert([
 		'event_id' => get_event_id($data['event']),
 		'detail' => $data['detail'],
 		'ip' => $data['ip'],
-		'employee_id' => $data['employee_id'],
+		'user_id' => $data['user_id'],
 		'username' => $data['username']
 	]);
 }
