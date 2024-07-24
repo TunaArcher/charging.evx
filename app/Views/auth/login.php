@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/png" href="<?php echo base_url('/assets/images/logos/logo.png'); ?>" />
+  <link rel="shortcut icon" type="image/png" href="<?php echo base_url('/assets/images/logos/favicon.ico'); ?>" />
 
   <!-- Core Css -->
   <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>" />
