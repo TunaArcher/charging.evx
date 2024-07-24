@@ -41,6 +41,11 @@ $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'userAuth']);
 // Map
 $routes->group('map', ['filter' => 'userAuth'], function ($routes) {
     $routes->get('index', 'Map::index');
+    $routes->post('SocketKey', 'Map::SocketKey');
+    $routes->post('GetLocations', 'Map::GetLocations');
+    $routes->post('GetMobileLocations', 'Map::GetMobileLocations');
+    $routes->post('GetUserChargingStatusByTag', 'Map::GetUserChargingStatusByTag');
+    $routes->post('GetDetail', 'Map::GetDetail');
 });
 
 // Wallet

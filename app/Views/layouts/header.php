@@ -15,12 +15,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <title>EVX</title>
+    <?php if (isset($css_critical)) {
+        echo $css_critical;
+    } ?>
     <style>
         /** BASE **/
         * {
             font-family: 'Kanit', sans-serif;
         }
     </style>
+    <script>
+        var serverUrl = '<?php echo base_url(); ?>'
+    </script>
 </head>
 
 <body>
