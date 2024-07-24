@@ -32,6 +32,7 @@ class Charging extends BaseController
             <script src="' . base_url('/assets/libs/jquery-validation/dist/jquery.validate.min.js') . '"></script>
             <script src="' . base_url('/assets/js/forms/form-wizard.js') . '"></script>
             <script src="' . base_url('/assets/js/apps/ecommerce.js') . '"></script>
+            <script src="' . base_url('/app/charging/index.js?v=' . time()) . '"></script>
         ';
         echo view('/app', $data);
     }
