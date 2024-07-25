@@ -7,12 +7,11 @@ $("#click-scan").click(function () {
   document.getElementById("scan_page").style.display = "block";
   document.getElementById("step_station").style.display = "none";
 
-   html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+  html5QrcodeScanner = new Html5QrcodeScanner("reader", {
     fps: 10,
     qrbox: 350,
   });
   html5QrcodeScanner.render(onScanSuccess);
-  
 });
 
 function onScanSuccess(decodedText, decodedResult) {
