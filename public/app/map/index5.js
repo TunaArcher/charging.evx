@@ -10,8 +10,8 @@ let mobileClusterRenderer;
 
 let infoWindow;
 const mapCenter = {
-  lat: 13.7563,
-  lng: 100.5018,
+  lat: 17.9604222,
+  lng: 102.5233639,
 };
 const mapZoom = 6;
 let focusStationKeyId = "";
@@ -423,7 +423,7 @@ function queryLocation(cond, callback) {
       mobileLocCount = mobileLocations.length;
 
       if (!map) {
-        console.log("test");
+
         map = new google.maps.Map(document.getElementById("map"), {
           center: mapCenter,
           zoom: mapZoom,
@@ -432,6 +432,169 @@ function queryLocation(cond, callback) {
           zoomControl: false,
           streetViewControl: false,
         });
+        const styledMapType = new google.maps.StyledMapType([
+          {
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#f5f5f5",
+              },
+            ],
+          },
+          {
+            elementType: "labels.icon",
+            stylers: [
+              {
+                visibility: "on",
+              },
+            ],
+          },
+          {
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#616161",
+              },
+            ],
+          },
+          {
+            elementType: "labels.text.stroke",
+            stylers: [
+              {
+                color: "#f5f5f5",
+              },
+            ],
+          },
+          {
+            featureType: "administrative.land_parcel",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#bdbdbd",
+              },
+            ],
+          },
+          {
+            featureType: "poi",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#eeeeee",
+              },
+            ],
+          },
+          {
+            featureType: "poi",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#757575",
+              },
+            ],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#e5e5e5",
+              },
+            ],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#9e9e9e",
+              },
+            ],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#ffffff",
+              },
+            ],
+          },
+          {
+            featureType: "road.arterial",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#2D8176",
+              },
+            ],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#dadada",
+              },
+            ],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#2D8176",
+              },
+            ],
+          },
+          {
+            featureType: "road.local",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#2D8176",
+              },
+            ],
+          },
+          {
+            featureType: "transit.line",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#e5e5e5",
+              },
+            ],
+          },
+          {
+            featureType: "transit.station",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#eeeeee",
+              },
+            ],
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [
+              {
+                color: "#c9c9c9",
+              },
+            ],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [
+              {
+                color: "#9e9e9e",
+              },
+            ],
+          },
+        ]);
+
+        map.mapTypes.set("styled_map", styledMapType);
+        map.setMapTypeId("styled_map");
 
         // Create the search box and link it to the UI element.
         const input = document.getElementById("pac-input");
@@ -539,6 +702,8 @@ function queryLocation(cond, callback) {
       /* End : Remove marker from maps */
 
       const resultBounds = new google.maps.LatLngBounds();
+
+      console.log(resultBounds);
       mapExtent = null;
       markers = locations
         .filter((cs) => cs.lat !== null && cs.lng !== null)
@@ -597,9 +762,12 @@ function queryLocation(cond, callback) {
       var allMarkers = markers.concat(mobileMarkers);
       if (!resultBounds.isEmpty()) {
         if (allMarkers.length > 1) {
+          console.log("aaaaaaaaa");
           if ("" !== "") {
+            console.log("if");
             zoomToMapfromHome("");
           } else {
+            console.log("else");
             map.fitBounds(resultBounds);
           }
 

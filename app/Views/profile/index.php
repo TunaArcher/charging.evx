@@ -96,54 +96,24 @@
                             <div class="col-12">
                                 <div class="card w-100 border position-relative overflow-hidden mb-0">
                                     <div class="card-body p-4">
-                                        <h4 class="card-title">Personal Details</h4>
+                                        <h4 class="card-title">ข้อมูลส่วนบุคคล</h4>
                                         <p class="card-subtitle mb-4">To change your personal detail , edit and save from here</p>
                                         <form>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
-                                                        <label for="exampleInputtext" class="form-label">Your Name</label>
-                                                        <input type="text" class="form-control" id="exampleInputtext" placeholder="Mathew Anderson">
+                                                        <label for="" class="form-label">ชื่อ - นามสกุล</label>
+                                                        <input type="text" class="form-control" id="" placeholder="">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label class="form-label">Location</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>United Kingdom</option>
-                                                            <option value="1">United States</option>
-                                                            <option value="2">United Kingdom</option>
-                                                            <option value="3">India</option>
-                                                            <option value="3">Russia</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputtext1" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="exampleInputtext1" placeholder="info@modernize.com">
+                                                        <label class="form-label">เบอร์โทรศัพท์</label>
+                                                        <input type="text" class="form-control" id="" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
-                                                        <label for="exampleInputtext2" class="form-label">Store Name</label>
-                                                        <input type="text" class="form-control" id="exampleInputtext2" placeholder="Maxima Studio">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Currency</label>
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>India (INR)</option>
-                                                            <option value="1">US Dollar ($)</option>
-                                                            <option value="2">United Kingdom (Pound)</option>
-                                                            <option value="3">India (INR)</option>
-                                                            <option value="3">Russia (Ruble)</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputtext3" class="form-label">Phone</label>
-                                                        <input type="text" class="form-control" id="exampleInputtext3" placeholder="+91 12345 65478">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div>
-                                                        <label for="exampleInputtext4" class="form-label">Address</label>
-                                                        <input type="text" class="form-control" id="exampleInputtext4" placeholder="814 Howard Street, 120065, India">
+                                                        <label for="" class="form-label">อีเมล</label>
+                                                        <input type="text" class="form-control" id="" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -302,141 +272,273 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-bills" role="tabpanel" aria-labelledby="pills-bills-tab" tabindex="0">
-                        <div class="row justify-content-center">
-                            <!-- <div class="mt-5">
-                                <h4 class="card-title text-dark">Other Gallery</h4>
-                                <p class="card-subtitle mb-3">
-                                    you can make gallery like this
-                                </p>
-                            </div> -->
-                            <div class="col-md-4">
-                                <div class="card overflow-hidden">
-                                    <div class="el-card-item pb-3">
-                                        <div class="
-                      el-card-avatar
-                      mb-3
-                      el-overlay-1
-                      w-100
-                      overflow-hidden
-                      position-relative
-                      text-center
-                    ">
-                                            <a class="image-popup-vertical-fit" href="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg">
-                                                <img src="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg" class="d-block position-relative w-100" alt="user" />
-                                            </a>
-                                        </div>
-                                        <div class="el-card-content text-center">
-                                            <h4 class="mb-0 card-title">Project title</h4>
-                                            <p class="card-subtitle">subtitle of project</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card overflow-hidden">
-                                    <div class="el-card-item pb-3">
-                                        <div class="
-                      el-card-avatar
-                      mb-3
-                      el-overlay-1
-                      w-100
-                      overflow-hidden
-                      position-relative
-                      text-center
-                    ">
-                                            <a class="image-popup-vertical-fit" href="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg">
-                                                <img src="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg" class="d-block position-relative w-100" alt="user" />
-                                            </a>
-                                        </div>
-                                        <div class="el-card-content text-center">
-                                            <h4 class="mb-0 card-title">Project title</h4>
-                                            <p class="card-subtitle">subtitle of project</p>
+                        <div class="">
+                            <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
+                                <li class="nav-item ms-auto">
+                                    <a href="javascript:void(0)" class="btn btn-primary d-flex align-items-center px-3 gap-6" id="add-notes">
+                                        <i class="ti ti-file fs-4"></i>
+                                        <span class="d-none d-md-block fw-medium fs-3">เพิ่มรถ</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="note-full-container" class="note-has-grid row">
+                                    <div class="col-md-4 single-note-item all-category" style="">
+                                        <div class="card card-body mb-0">
+                                            <span class="side-stick"></span>
+                                            <h6 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie"> NETA X500 </h6>
+                                            <p class="note-date fs-2">00 March 0000</p>
+                                            <img class="rounded mb-2" src="https://evxspst.sgp1.cdn.digitaloceanspaces.com/uploads/stock_img/CTX000405_1721279445_4166449f6a24861be7d7.jpeg" alt="">
+                                            <div class="note-content">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="link me-1">
+                                                    <i class="ti ti-star fs-4 favourite-note"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="link text-danger ms-2">
+                                                    <i class="ti ti-trash fs-4 remove-note"></i>
+                                                </a>
+                                                <div class="ms-auto">
+                                                    <div class="category-selector btn-group">
+                                                        <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">
+                                                            <div class="category">
+                                                                <div class="category-business"></div>
+                                                                <div class="category-social"></div>
+                                                                <div class="category-important"></div>
+                                                                <span class="more-options text-dark">
+                                                                    <i class="ti ti-dots-vertical fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right category-menu">
+                                                            <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business d-flex align-items-center" href="javascript:void(0);">Business</a>
+                                                            <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social d-flex align-items-center" href="javascript:void(0);"> Social</a>
+                                                            <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important d-flex align-items-center" href="javascript:void(0);"> Important</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-md-4 single-note-item all-category note-important" style="">
+                                        <div class="card card-body mb-0">
+                                            <span class="side-stick"></span>
+                                            <h6 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie"> NETA X500 </h6>
+                                            <p class="note-date fs-2">00 March 0000</p>
+                                            <img class="rounded mb-2" src="https://evxspst.sgp1.cdn.digitaloceanspaces.com/uploads/stock_img/CTX000405_1721279445_4166449f6a24861be7d7.jpeg" alt="">
+                                            <div class="note-content">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="link me-1">
+                                                    <i class="ti ti-star fs-4 favourite-note"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="link text-danger ms-2">
+                                                    <i class="ti ti-trash fs-4 remove-note"></i>
+                                                </a>
+                                                <div class="ms-auto">
+                                                    <div class="category-selector btn-group">
+                                                        <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">
+                                                            <div class="category">
+                                                                <div class="category-business"></div>
+                                                                <div class="category-social"></div>
+                                                                <div class="category-important"></div>
+                                                                <span class="more-options text-dark">
+                                                                    <i class="ti ti-dots-vertical fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right category-menu">
+                                                            <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business d-flex align-items-center" href="javascript:void(0);">Business</a>
+                                                            <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social d-flex align-items-center" href="javascript:void(0);"> Social</a>
+                                                            <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important d-flex align-items-center" href="javascript:void(0);"> Important</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 single-note-item all-category note-social" style="">
+                                        <div class="card card-body mb-0">
+                                            <span class="side-stick"></span>
+                                            <h6 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie"> NETA X500 </h6>
+                                            <p class="note-date fs-2">00 March 0000</p>
+                                            <img class="rounded mb-2" src="https://evxspst.sgp1.cdn.digitaloceanspaces.com/uploads/stock_img/CTX000405_1721279445_4166449f6a24861be7d7.jpeg" alt="">
+                                            <div class="note-content">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="link me-1">
+                                                    <i class="ti ti-star fs-4 favourite-note"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="link text-danger ms-2">
+                                                    <i class="ti ti-trash fs-4 remove-note"></i>
+                                                </a>
+                                                <div class="ms-auto">
+                                                    <div class="category-selector btn-group">
+                                                        <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">
+                                                            <div class="category">
+                                                                <div class="category-business"></div>
+                                                                <div class="category-social"></div>
+                                                                <div class="category-important"></div>
+                                                                <span class="more-options text-dark">
+                                                                    <i class="ti ti-dots-vertical fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right category-menu">
+                                                            <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business d-flex align-items-center" href="javascript:void(0);">Business</a>
+                                                            <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social d-flex align-items-center" href="javascript:void(0);"> Social</a>
+                                                            <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important d-flex align-items-center" href="javascript:void(0);"> Important</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 single-note-item all-category note-business" style="">
+                                        <div class="card card-body mb-0">
+                                            <span class="side-stick"></span>
+                                            <h6 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie"> NETA X500 </h6>
+                                            <p class="note-date fs-2">00 March 0000</p>
+                                            <img class="rounded mb-2" src="https://evxspst.sgp1.cdn.digitaloceanspaces.com/uploads/stock_img/CTX000405_1721279445_4166449f6a24861be7d7.jpeg" alt="">
+                                            <div class="note-content">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="link me-1">
+                                                    <i class="ti ti-star fs-4 favourite-note"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="link text-danger ms-2">
+                                                    <i class="ti ti-trash fs-4 remove-note"></i>
+                                                </a>
+                                                <div class="ms-auto">
+                                                    <div class="category-selector btn-group">
+                                                        <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">
+                                                            <div class="category">
+                                                                <div class="category-business"></div>
+                                                                <div class="category-social"></div>
+                                                                <div class="category-important"></div>
+                                                                <span class="more-options text-dark">
+                                                                    <i class="ti ti-dots-vertical fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right category-menu">
+                                                            <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business d-flex align-items-center" href="javascript:void(0);">Business</a>
+                                                            <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social d-flex align-items-center" href="javascript:void(0);"> Social</a>
+                                                            <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important d-flex align-items-center" href="javascript:void(0);"> Important</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 single-note-item all-category note-social" style="">
+                                        <div class="card card-body mb-0">
+                                            <span class="side-stick"></span>
+                                            <h6 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie"> NETA X500 </h6>
+                                            <p class="note-date fs-2">00 March 0000</p>
+                                            <img class="rounded mb-2" src="https://evxspst.sgp1.cdn.digitaloceanspaces.com/uploads/stock_img/CTX000405_1721279445_4166449f6a24861be7d7.jpeg" alt="">
+                                            <div class="note-content">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="link me-1">
+                                                    <i class="ti ti-star fs-4 favourite-note"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="link text-danger ms-2">
+                                                    <i class="ti ti-trash fs-4 remove-note"></i>
+                                                </a>
+                                                <div class="ms-auto">
+                                                    <div class="category-selector btn-group">
+                                                        <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">
+                                                            <div class="category">
+                                                                <div class="category-business"></div>
+                                                                <div class="category-social"></div>
+                                                                <div class="category-important"></div>
+                                                                <span class="more-options text-dark">
+                                                                    <i class="ti ti-dots-vertical fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right category-menu">
+                                                            <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business d-flex align-items-center" href="javascript:void(0);">Business</a>
+                                                            <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social d-flex align-items-center" href="javascript:void(0);"> Social</a>
+                                                            <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important d-flex align-items-center" href="javascript:void(0);"> Important</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 single-note-item all-category note-important" style="">
+                                        <div class="card card-body mb-0">
+                                            <span class="side-stick"></span>
+                                            <h6 class="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie"> NETA X500 </h6>
+                                            <p class="note-date fs-2">00 March 0000</p>
+                                            <img class="rounded mb-2" src="https://evxspst.sgp1.cdn.digitaloceanspaces.com/uploads/stock_img/CTX000405_1721279445_4166449f6a24861be7d7.jpeg" alt="">
+                                            <div class="note-content">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="javascript:void(0)" class="link me-1">
+                                                    <i class="ti ti-star fs-4 favourite-note"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="link text-danger ms-2">
+                                                    <i class="ti ti-trash fs-4 remove-note"></i>
+                                                </a>
+                                                <div class="ms-auto">
+                                                    <div class="category-selector btn-group">
+                                                        <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="true">
+                                                            <div class="category">
+                                                                <div class="category-business"></div>
+                                                                <div class="category-social"></div>
+                                                                <div class="category-important"></div>
+                                                                <span class="more-options text-dark">
+                                                                    <i class="ti ti-dots-vertical fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right category-menu">
+                                                            <a class="note-business badge-group-item badge-business dropdown-item position-relative category-business d-flex align-items-center" href="javascript:void(0);">Business</a>
+                                                            <a class="note-social badge-group-item badge-social dropdown-item position-relative category-social d-flex align-items-center" href="javascript:void(0);"> Social</a>
+                                                            <a class="note-important badge-group-item badge-important dropdown-item position-relative category-important d-flex align-items-center" href="javascript:void(0);"> Important</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card overflow-hidden">
-                                    <div class="el-card-item pb-3">
-                                        <div class="
-                      el-card-avatar
-                      mb-3
-                      el-overlay-1
-                      w-100
-                      overflow-hidden
-                      position-relative
-                      text-center
-                    ">
-                                            <a class="image-popup-vertical-fit" href="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg">
-                                                <img src="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg" class="d-block position-relative w-100" alt="user" />
-                                            </a>
+                            <!-- Modal Add notes -->
+                            <div class="modal fade" id="addnotesmodal" tabindex="-1" aria-labelledby="addnotesmodalTitle" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content border-0">
+                                        <div class="modal-header bg-primary rounded-top">
+                                            <h6 class="modal-title text-white">Add Notes</h6>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="el-card-content text-center">
-                                            <h4 class="mb-0 card-title">Project title</h4>
-                                            <p class="card-subtitle">subtitle of project</p>
+                                        <div class="modal-body">
+                                            <div class="notes-box">
+                                                <div class="notes-content">
+                                                    <form action="javascript:void(0);" id="addnotesmodalTitle">
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                                <div class="note-title">
+                                                                    <label class="form-label">Note Title</label>
+                                                                    <input type="text" id="note-has-title" class="form-control" minlength="25" placeholder="Title">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="note-description">
+                                                                    <label class="form-label">Note Description</label>
+                                                                    <textarea id="note-has-description" class="form-control" minlength="60" placeholder="Description" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="card overflow-hidden">
-                                    <div class="el-card-item pb-3">
-                                        <div class="
-                      el-card-avatar
-                      mb-3
-                      el-overlay-1
-                      w-100
-                      overflow-hidden
-                      position-relative
-                      text-center
-                    ">
-                                            <a class="image-popup-vertical-fit" href="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg">
-                                                <img src="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg" class="d-block position-relative w-100" alt="user" />
-                                            </a>
-                                        </div>
-                                        <div class="el-card-content text-center">
-                                            <h4 class="mb-0 card-title">Project title</h4>
-                                            <p class="card-subtitle">subtitle of project</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card overflow-hidden">
-                                    <div class="el-card-item pb-3">
-                                        <div class="
-                      el-card-avatar
-                      mb-3
-                      el-overlay-1
-                      w-100
-                      overflow-hidden
-                      position-relative
-                      text-center
-                    ">
-                                            <a class="image-popup-vertical-fit" href="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg">
-                                                <img src="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg" class="d-block position-relative w-100" alt="user" />
-                                            </a>
-                                        </div>
-                                        <div class="el-card-content text-center">
-                                            <h4 class="mb-0 card-title">Project title</h4>
-                                            <p class="card-subtitle">subtitle of project</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card overflow-hidden">
-                                    <div class="el-card-item pb-3">
-                                        <div class="
-                      el-card-avatar
-                      mb-3
-                      el-overlay-1
-                      w-100
-                      overflow-hidden
-                      position-relative
-                      text-center
-                    ">
-                                            <a class="image-popup-vertical-fit" href="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg">
-                                                <img src="https://ev-hub.extej.com/assets/nissan-4b72c3d4.svg" class="d-block position-relative w-100" alt="user" />
-                                            </a>
-                                        </div>
-                                        <div class="el-card-content text-center">
-                                            <h4 class="mb-0 card-title">Project title</h4>
-                                            <p class="card-subtitle">subtitle of project</p>
+                                        <div class="modal-footer">
+                                            <div class="d-flex gap-6">
+                                                <button class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Discard</button>
+                                                <button id="btn-n-add" class="btn btn-primary" disabled="disabled">Add</button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

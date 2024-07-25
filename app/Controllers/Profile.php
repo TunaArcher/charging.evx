@@ -26,6 +26,10 @@ class Profile extends BaseController
     {
         $data['content'] = 'profile/index';
         $data['title'] = 'บัญชีผู้ใช้งาน';
+        $data['css_critical'] = '';
+        $data['js_critical'] = '
+            <script src="' . base_url('/app/profile/index.js') . '"></script>
+        ';
         echo view('/app', $data);
     }
 
