@@ -28,30 +28,29 @@
                 </div>
                 <div class="text-center">
                     <p class="text-center badge fw-medium fs-2 bg-primary-subtle text-primary">Or</p>
-
                 </div>
                 <div class="col-12">
                     <div class="card w-100 border position-relative overflow-hidden mb-0 text-center">
                         <div class="card-body p-4">
                             <!-- <form> -->
-                                <div class="text-center">
-                                    <a href="#" onclick="showVideo(); return false;">
-                                        <img src="https://geonine.io/galvanic/Resources/Images/ev_qr_scan.png" class="img-fluid mb-3">
-                                    </a>
-                                    <div class="col-12 text-center">
-                                        <div class="align-items-center justify-content-end mt-4 gap-6">
-                                            <button class="btn btn-primary" id="click-scan">Click here to scan QR Code</button>
-                                        </div>
+                            <div class="text-center">
+                                <a href="#" onclick="showVideo(); return false;">
+                                    <img src="https://geonine.io/galvanic/Resources/Images/ev_qr_scan.png" class="img-fluid mb-3">
+                                </a>
+                                <div class="col-12 text-center">
+                                    <div class="align-items-center justify-content-end mt-4 gap-6">
+                                        <button class="btn btn-primary" id="click-scan">Click here to scan QR Code</button>
                                     </div>
                                 </div>
+                            </div>
                             <!-- </form> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="checkout"  id="step_station" style="display:none">
-            <div class="card" >
+        <div class="checkout" id="step_station" style="display:none">
+            <div class="card">
                 <div class="card-body p-4">
                     <div class="wizard-content">
                         <form action="#" class="tab-wizard wizard-circle">
@@ -317,6 +316,15 @@
                                 </div>
                             </section>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" id="scan_page" style="display:none">
+            <div class="card-body">
+                <div class="col-12">
+                    <div class="col-md-12">
+                        <div id="reader"></div>
                     </div>
                 </div>
             </div>
