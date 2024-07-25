@@ -367,18 +367,19 @@ function refreshLocation() {
 
 class EVRenderer {
   render({ count, position }, stats) {
+    console.log("render");
     // change color if this cluster has more markers than the mean cluster
     //const color = count > Math.max(10, stats.clusters.markers.mean) ? "#0000ff" : "#1E90FF";
     const color =
       count > Math.max(10, stats.clusters.markers.mean) ? "#4169E1" : "#00BFFF";
     // create svg url with fill color
     const svg = window.btoa(`
-                <svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
-                    <circle cx="120" cy="120" opacity="1" r="70" />
-                    <circle cx="120" cy="120" opacity=".6" r="90" />
-                    <circle cx="120" cy="120" opacity=".3" r="110" />
-                </svg>
-            `);
+        <svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+            <circle cx="120" cy="120" opacity="1" r="70" />
+            <circle cx="120" cy="120" opacity=".6" r="90" />
+            <circle cx="120" cy="120" opacity=".3" r="110" />
+        </svg>
+    `);
     // create marker using svg icon
     return new google.maps.Marker({
       position,
@@ -422,6 +423,7 @@ function queryLocation(cond, callback) {
       mobileLocCount = mobileLocations.length;
 
       if (!map) {
+        console.log("test");
         map = new google.maps.Map(document.getElementById("map"), {
           center: mapCenter,
           zoom: mapZoom,
@@ -913,8 +915,8 @@ function getInfoWindowContent(location, marker) {
 
   infoWindow.setContent(markerConent);
   infoWindow.setOptions({
-    minWidth: 700, //350,
-    maxWidth: 700, //350,
+    minWidth: 350,
+    maxWidth: 350,
   });
   infoWindow.open(map, marker);
 

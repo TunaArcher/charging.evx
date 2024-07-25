@@ -33,6 +33,6 @@ class Wallet extends BaseController
     {
         $data['content'] = 'wallet/topup';
         $data['title'] = 'Topup';
-        echo view('/app', $data);
+        echo view('/wallet/topup', $data);
     }
 }

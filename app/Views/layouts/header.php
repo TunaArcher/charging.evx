@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/png" href="<?php echo base_url('/assets/images/logos/logo.png'); ?>" />
+    <link rel="shortcut icon" type="image/png" href="<?php echo base_url('/assets/images/logos/favicon.ico'); ?>" />
 
     <!-- Core Css -->
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>" />
@@ -376,7 +376,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="message-body">
-                                                    <a href="javascript:void(0)" class="p-2 dropdown-item h6 rounded-1">
+                                                    <a href="<?php echo base_url('profile/index'); ?>" class="p-2 dropdown-item h6 rounded-1">
                                                         บัญชี
                                                     </a>
                                                     <a href="javascript:void(0)" class="p-2 dropdown-item h6 rounded-1 disabled">
@@ -384,9 +384,6 @@
                                                     </a>
                                                     <a href="javascript:void(0)" class="p-2 dropdown-item h6 rounded-1 disabled">
                                                         My Statements <span class="badge bg-danger-subtle text-danger rounded ms-8">4</span>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="p-2 dropdown-item h6 rounded-1 disabled">
-                                                        Account Settings
                                                     </a>
                                                     <hr>
                                                     <a href="<?php echo base_url('logout'); ?>" class="p-2 dropdown-item h6 rounded-1">

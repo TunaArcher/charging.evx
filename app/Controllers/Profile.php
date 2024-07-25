@@ -33,6 +33,12 @@ class Profile extends BaseController
     {
         $data['content'] = 'profile/history';
         $data['title'] = 'ประวัติ';
+        $data['css_critical'] = '<link rel="stylesheet" href="../assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />';
+        $data['js_critical'] = '
+            <script src="' . base_url('/assets/libs/datatables.net/js/jquery.dataTables.min.js') . '"></script>
+            <script src="' . base_url('/assets/js/datatable/datatable-basic.init.js') . '"></script>
+            <script src="' . base_url('/app/profile/history.js') . '"></script>
+        ';
         echo view('/app', $data);
     }
 }
