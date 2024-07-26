@@ -94,7 +94,7 @@
     }
 
     .pac-card {
-        background-color: #fff;
+        background-color: #1a2537;
         border: 0;
         border-radius: 2px;
         box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
@@ -129,7 +129,7 @@
     }
 
     #pac-input {
-        background-color: #fff;
+        background-color: #1f2a3d;
         font-family: var(--main-font-family);
         font-size: 15px;
         font-weight: 300;
@@ -137,6 +137,7 @@
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
         border-color: rgba(0, 0, 0, 0.125);
+        margin-top: 10px !important;
     }
 
     #pac-input:focus {
@@ -145,9 +146,9 @@
     }
 
     .popup-form {
-        border: solid 1px #fff;
+        border: solid 1px #1a2537;
         border-radius: 3px;
-        background-color: #fff;
+        background-color: #1a2537;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
@@ -211,7 +212,7 @@
         margin-left: 3px;
         text-indent: -999px;
         cursor: pointer;
-        background-color: #ffffff;
+        background-color: #1a2537fff;
         background-clip: padding-box;
         border: 0;
         border-top: 10px solid transparent;
@@ -226,15 +227,19 @@
         margin-top: 60px;
     }
 </style>
-
+<style>
+    .map-info-window {
+        color: #01c0c8 !important;
+    }
+</style>
 <div class="body-wrapper">
-    <div class="container-fluid">
+    <div class="position-relative">
         <div class="position-relative" style="border: none; height: calc(100vh - 129px) !important;">
             <input id="pac-input" class="controls mt-1 p-1 h-95" type="text" placeholder="Search places" />
             <div id="map"></div>
         </div>
 
-        <div id="divSearch" class="position-absolute bottom-0 end-0 popup-form" style="display: none; margin-bottom: 72px; margin-right: 52px;">
+        <div id="divSearch" class="position-absolute bottom-0 end-0 popup-form" style="display: none; margin-bottom: 23px; margin-right: 52px;">
             <div class="text-end">
                 <button class="btn btn-sm btn-close-popup" data-popup-target="divSearch" type="button"><i class="fas fa-times"></i></button>
             </div>
@@ -301,7 +306,7 @@
             </div>
 
         </div>
-        <div id="divLegend" class="position-absolute bottom-0 end-0 popup-form p-1 pt-2 pb-0" style="display: none; margin-bottom: 22px; margin-right: 52px; min-width: 100px; max-width: 200px;">
+        <div id="divLegend" class="position-absolute bottom-0 end-0 popup-form p-1 pt-2 pb-0" style="display: none; margin-bottom: 72px; margin-right: 52px; min-width: 100px; max-width: 200px;">
             <div class="text-end">
                 <button class="btn btn-sm btn-close-popup" data-popup-target="divLegend" type="button"><i class="fas fa-times"></i></button>
             </div>

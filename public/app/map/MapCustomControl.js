@@ -9,8 +9,8 @@ function SearchControl(controlDiv, map, searchControlReady) {
   //const controlUI = document.createElement("div");
   const controlUI = $(`<div></div>`)[0];
 
-  controlUI.style.backgroundColor = "#fff";
-  controlUI.style.border = "2px solid #fff";
+  controlUI.style.backgroundColor = "#1a2537";
+  controlUI.style.border = "2px solid #1a2537";
   controlUI.style.borderRadius = "3px";
   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
   controlUI.style.cursor = "pointer";
@@ -47,45 +47,45 @@ function SearchControl(controlDiv, map, searchControlReady) {
 }
 
 function ResultTableControl(controlDiv, map, searchControlReady) {
-  // Set CSS for the control border.
-  //const controlUI = document.createElement("div");
-  const controlUI = $(`<div></div>`)[0];
+  // // Set CSS for the control border.
+  // //const controlUI = document.createElement("div");
+  // const controlUI = $(`<div></div>`)[0];
 
-  controlUI.style.backgroundColor = "#fff";
-  controlUI.style.border = "2px solid #fff";
-  controlUI.style.borderRadius = "3px";
-  controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-  controlUI.style.cursor = "pointer";
-  controlUI.style.marginBottom = "8px";
-  //controlUI.style.marginBottom = "22px";
-  controlUI.style.marginRight = "12px";
-  controlUI.style.textAlign = "center";
-  //controlUI.title = "Click to recenter the map";
-  controlDiv.appendChild(controlUI);
+  // controlUI.style.backgroundColor = "#1a2537";
+  // controlUI.style.border = "2px solid #1a2537";
+  // controlUI.style.borderRadius = "3px";
+  // controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+  // controlUI.style.cursor = "pointer";
+  // controlUI.style.marginBottom = "8px";
+  // //controlUI.style.marginBottom = "22px";
+  // controlUI.style.marginRight = "12px";
+  // controlUI.style.textAlign = "center";
+  // //controlUI.title = "Click to recenter the map";
+  // controlDiv.appendChild(controlUI);
 
-  // Set CSS for the control interior.
-  //const controlText = document.createElement("div");
-  const controlText = $(`<a></a>`)[0];
+  // // Set CSS for the control interior.
+  // //const controlText = document.createElement("div");
+  // const controlText = $(`<a></a>`)[0];
 
-  //controlText.style.color = "rgb(105, 105, 105)";
-  controlText.style.fontSize = "22px";
-  controlText.style.lineHeight = "38px";
-  controlText.style.paddingLeft = "5px";
-  controlText.style.paddingRight = "5px";
-  controlText.style.marginBottom = "5px";
-  controlText.innerHTML = `<i class="fas fa-table"></i>`;
-  controlText.classList.add("custom-map-control-button");
-  controlUI.appendChild(controlText);
-  // Setup the click event listeners: simply set the map to Chicago.
-  controlUI.addEventListener("click", () => {
-    $("#divSearch").hide();
-    $("#divResultTable").toggle();
-    $("#divLegend").hide();
-  });
+  // //controlText.style.color = "rgb(105, 105, 105)";
+  // controlText.style.fontSize = "22px";
+  // controlText.style.lineHeight = "38px";
+  // controlText.style.paddingLeft = "5px";
+  // controlText.style.paddingRight = "5px";
+  // controlText.style.marginBottom = "5px";
+  // controlText.innerHTML = `<i class="fas fa-table"></i>`;
+  // controlText.classList.add("custom-map-control-button");
+  // controlUI.appendChild(controlText);
+  // // Setup the click event listeners: simply set the map to Chicago.
+  // controlUI.addEventListener("click", () => {
+  //   $("#divSearch").hide();
+  //   $("#divResultTable").toggle();
+  //   $("#divLegend").hide();
+  // });
 
-  if (searchControlReady) {
-    searchControlReady();
-  }
+  // if (searchControlReady) {
+  //   searchControlReady();
+  // }
 }
 
 function CurrentLocationControl(controlDiv, map, controlReady) {
@@ -93,8 +93,8 @@ function CurrentLocationControl(controlDiv, map, controlReady) {
   //const controlUI = document.createElement("div");
   const controlUI = $(`<div></div>`)[0];
 
-  controlUI.style.backgroundColor = "#fff";
-  controlUI.style.border = "2px solid #fff";
+  controlUI.style.backgroundColor = "#1a2537";
+  controlUI.style.border = "2px solid #1a2537";
   controlUI.style.borderRadius = "3px";
   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
   controlUI.style.cursor = "pointer";
@@ -117,7 +117,7 @@ function CurrentLocationControl(controlDiv, map, controlReady) {
   controlText.style.paddingRight = "5px";
   controlText.style.marginBottom = "5px";
   //controlText.innerHTML = `<i class="far fa-compass"></i>`;
-  controlText.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="map-control-my-location" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`;
+  controlText.innerHTML = `<i class="fa-solid fa-location-crosshairs" style="color: #ffffff;"></i>`;
   controlText.classList.add("custom-map-control-button");
   controlUI.appendChild(controlText);
   // Setup the click event listeners: simply set the map to Chicago.
@@ -149,7 +149,7 @@ function CurrentLocationControl(controlDiv, map, controlReady) {
               fillColor: "#ff4500",
               fillOpacity: 0.9,
               strokeWeight: 0.8,
-              strokeColor: "#ffffff",
+              strokeColor: "#1a25371a2537",
               rotation: 0,
               scale: 2,
               anchor: new google.maps.Point(11, 22),
@@ -252,8 +252,8 @@ function LegendControl(controlDiv, map, controlReady) {
   //const controlUI = document.createElement("div");
   const controlUI = $(`<div></div>`)[0];
 
-  controlUI.style.backgroundColor = "#fff";
-  controlUI.style.border = "2px solid #fff";
+  controlUI.style.backgroundColor = "#1a2537";
+  controlUI.style.border = "2px solid #1a2537";
   controlUI.style.borderRadius = "3px";
   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
   controlUI.style.cursor = "pointer";
@@ -269,7 +269,7 @@ function LegendControl(controlDiv, map, controlReady) {
   const controlText = $(`<a></a>`)[0];
 
   //controlText.style.color = "rgb(105, 105, 105)";
-  controlText.style.fontSize = "22px";
+  controlText.style.fontSize = "20px";
   controlText.style.lineHeight = "38px";
   controlText.style.paddingLeft = "5px";
   controlText.style.paddingRight = "5px";
@@ -294,8 +294,8 @@ function ZoomToFullExtent(controlDiv, map, controlReady) {
   //const controlUI = document.createElement("div");
   const controlUI = $(`<div></div>`)[0];
 
-  controlUI.style.backgroundColor = "#fff";
-  controlUI.style.border = "2px solid #fff";
+  controlUI.style.backgroundColor = "#1a2537";
+  controlUI.style.border = "2px solid #1a2537";
   controlUI.style.borderRadius = "3px";
   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
   controlUI.style.cursor = "pointer";
