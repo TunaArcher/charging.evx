@@ -91,7 +91,7 @@
           <div class="position-relative overflow-hidden min-vh-100 w-100 d-flex align-items-center justify-content-center">
             <div class="d-flex align-items-center justify-content-center w-100">
               <div class="row justify-content-center w-100 my-5 my-xl-0">
-                <div class="col-md-6 d-flex flex-column justify-content-center">
+                <div class="col-md-4 d-flex flex-column justify-content-center">
                   <div class="card mb-0 bg-body auth-login m-auto w-100">
                     <div class="row gx-0">
                       <!-- ------------------------------------------------- -->
@@ -105,23 +105,8 @@
                                 <img src="<?php echo base_url('assets/images/logos/logo.png'); ?>" class="dark-logo" alt="Logo-Dark" />
                               </a>
                               <h2 class="lh-base mb-4">Let's get you signed in</h2>
-                              <div class="row">
-                                <div class="col-6 mb-2 mb-sm-0">
-                                  <a class="btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="<?php echo base_url('/loginFB'); ?>" role="button">
-                                    <img src="../assets/images/svgs/facebook-icon.svg" alt="matdash-img" class="img-fluid me-2" width="18" height="18">
-                                    <span class="d-none d-xxl-inline-flex"> Sign in with </span>&nbsp; Facebook
-                                  </a>
-                                </div>
-                                <div class="col-6">
-                                  <a class="disabled btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="javascript:void(0)" role="button">
-                                    <img src="../assets/images/svgs/google-icon.svg" alt="matdash-img" class="img-fluid me-2" width="18" height="18">
-                                    <span class="d-none d-xxl-inline-flex"> Sign in with </span>&nbsp; Google
-                                  </a>
-
-                                </div>
-                              </div>
                               <div class="position-relative text-center my-4">
-                                <p class="mb-0 fs-12 px-3 d-inline-block bg-body z-index-5 position-relative">Or sign in with
+                                <p class="mb-0 fs-12 px-3 d-inline-block bg-body z-index-5 position-relative">sign in with
                                   email
                                 </p>
                                 <span class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
@@ -147,11 +132,25 @@
                                     </label>
                                   </div>
                                 </div>
-                                <button id="btn-login" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Sign In</button>
-                                <!-- <div class="d-flex align-items-center">
-                            <p class="fs-12 mb-0 fw-medium">Don’t have an account yet?</p>
-                            <a class="text-primary fw-semibold ms-2" href="<?php echo base_url('register'); ?>">Sign Up Now</a>
-                          </div> -->
+                                <button id="btn-login" class="btn btn-info w-100 py-8 mb-2 rounded-1">Sign In</button>
+                                <a href="<?php echo base_url('/register'); ?>" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Register</a>
+                                <footer class="text-center text-lg-start bg-light text-muted">
+                                  <!-- Copyright -->
+                                  <div class="text-center small pt-3 pb-3 footer-container">
+                                    <a href="<?php echo base_url(); ?>" target="_blank" class="no-style"><i class="fa fa-book"></i> คู่มือการใช้งาน</a>
+                                    <!-- <br><a href="https://geonine.io/evpublic/instruction/deactivate_account_th.png" target="_blank" class="no-style"><i class="fa fa-book"></i> การลบบัญชีผู้ใช้งาน</a> -->
+                                    <hr>
+                                    © 2024 -
+                                    <a class="text-reset fw-bold" href="#">EVX Co.,Ltd.</a>
+                                    <br>
+                                    <a href="#" class="no-style me-2 small" onclick="showTermModal(); return false;">ข้อตกลงและเงื่อนไขการให้บริการ</a>
+                                    <span>|</span>
+                                    <a href="#" class="no-style small" onclick="showPrivacyModal(); return false;">นโยบายความเป็นส่วนตัว</a>
+                                    <br>
+                                    <small>Last Update : 01/08/2024 00:00</small>
+                                  </div>
+                                  <!-- Copyright -->
+                                </footer>
                               </form>
                             </div>
                           </div>
