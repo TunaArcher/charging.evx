@@ -117,7 +117,6 @@ class Authentication extends BaseController
     public function loginFB()
     {
         $data = [];
-        require_once APPPATH . 'Libraries/vendor/autoload.php';
         $facebook = new \Facebook\Facebook([
             'app_id' => '1047735223732919',
             'app_secret' => 'a6f1f3a6e9b0c150ee28b7ba69a0c851',
@@ -153,6 +152,7 @@ class Authentication extends BaseController
             $fb_permissions = ['email'];
             $data['fb_login_url'] = $fb_helper->getLoginUrl('https://tutorslog.com/login', $fb_permissions);
         }
+
         return view("fb_view", $data);
     }
 
