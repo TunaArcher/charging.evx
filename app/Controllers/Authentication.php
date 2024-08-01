@@ -150,7 +150,7 @@ class Authentication extends BaseController
             }
         } else {
             $fb_permissions = ['email'];
-            $data['fb_login_url'] = $fb_helper->getLoginUrl('https://tutorslog.com/login', $fb_permissions);
+            $data['fb_login_url'] = $fb_helper->getLoginUrl('https://charging.evx.services/loginFB', $fb_permissions);
         }
 
         return view("fb_view", $data);
