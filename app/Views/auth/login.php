@@ -107,7 +107,7 @@
                               <h2 class="lh-base mb-4">Let's get you signed in</h2>
                               <div class="row">
                                 <div class="col-6 mb-2 mb-sm-0">
-                                  <a class="disabled btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="javascript:void(0)" role="button">
+                                  <a class="btn btn-white shadow-sm text-dark link-primary border fw-semibold d-flex align-items-center justify-content-center rounded-1 py-6" href="<?php echo base_url('/loginFB'); ?>" role="button">
                                     <img src="../assets/images/svgs/facebook-icon.svg" alt="matdash-img" class="img-fluid me-2" width="18" height="18">
                                     <span class="d-none d-xxl-inline-flex"> Sign in with </span>&nbsp; Facebook
                                   </a>

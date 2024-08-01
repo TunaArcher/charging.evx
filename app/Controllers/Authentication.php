@@ -16,7 +16,7 @@ class Authentication extends BaseController
         try {
 
             // ============================================== TEST
-            
+
             $userID = 2;
             $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
             $userloginDetailID = $UserLoginDetailModel->insertuserLoginDetail([
@@ -43,7 +43,7 @@ class Authentication extends BaseController
                 ->setJSON($response);
             // ============================================== TEST
 
-            
+
             if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
 
             $UserModel = new \App\Models\UserModel();
@@ -114,6 +114,56 @@ class Authentication extends BaseController
             ->setJSON($response);
     }
 
+    public function loginFB()
+    {
+        $data = [];
+        require_once APPPATH . 'Libraries/vendor/autoload.php';
+        $facebook = new \Facebook\Facebook([
+            'app_id' => '1047735223732919',
+            'app_secret' => 'a6f1f3a6e9b0c150ee28b7ba69a0c851',
+            'default_graph_version' => 'v2.3'
+        ]);
+
+        $fb_helper = $facebook->getRedirectLoginHelper();
+        if ($this->request->getVar('state')) {
+            $fb_helper->getPersistentDataHandler()->set('state', $this->request->getVar('state'));
+        }
+
+        if ($this->request->getVar('code')) {
+            if (session()->get('access_token')) {
+                $access_token = session()->get('access_token');
+            } else {
+                $access_token = $fb_helper->getAccessToken();
+                session()->set('access_token', $access_token);
+                $facebook->setDefaultAccessToken(session()->get('access_token'));
+            }
+            $graph_response = $facebook->get('/me?fields=name,email', $access_token);
+            $fb_user_info = $graph_response->getGraphUser();
+
+            if (!empty($fb_user_info['id'])) {
+                $fbdata = [
+                    'profile_pic' => 'http://graph.facebook.com/' . $fb_user_info['id'] . '/picture',
+                    'user_name' => $fb_user_info['name'],
+                    'email' => $fb_user_info['email'],
+                    'userid' => $fb_user_info['id'],
+                ];
+                session()->set('userdata', $fbdata);
+            }
+        } else {
+            $fb_permissions = ['email'];
+            $data['fb_login_url'] = $fb_helper->getLoginUrl('https://tutorslog.com/login', $fb_permissions);
+        }
+        return view("fb_view", $data);
+    }
+
+    // public function logoutFB()
+    // {
+    //     if (session()->has('userdata')) {
+    //         session()->destroy();
+    //         return redirect()->to(base_url() . '/login');
+    //     }
+    // }
+
     public function logout()
     {
         try {
@@ -121,7 +171,6 @@ class Authentication extends BaseController
             $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
             $UserLoginDetailModel->updateUserLoginDetailByID(session()->get('login_detail_id'), ['active' => '0']);
 
-          
             logger_store([
                 'user_id' => session()->get('userID'),
                 'username' => session()->get('username'),

@@ -33,6 +33,7 @@ $routes->set404Override();
 // Authentication
 $routes->get('/', 'Home::index', ['filter' => 'userNoAuth']);
 $routes->match(['get', 'post'], 'login', 'Authentication::login', ['filter' => 'userNoAuth']);
+$routes->post('loginFB', 'Authentication::loginFB', ['filter' => 'userNoAuth']);
 $routes->get('logout', 'Authentication::logout');
 
 // Dashboard
