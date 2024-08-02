@@ -35,7 +35,7 @@
                             <!-- <form> -->
                             <div class="text-center">
                                 <a href="#" onclick="showVideo(); return false;">
-                                    <img src="https://geonine.io/galvanic/Resources/Images/ev_qr_scan.png" class="img-fluid mb-3">
+                                    <img src="<?php echo base_url('assets/images/backgrounds/BG.jpg'); ?>" class="img-fluid mb-3">
                                 </a>
                                 <div class="col-12 text-center">
                                     <div class="align-items-center justify-content-end mt-4 gap-6">
