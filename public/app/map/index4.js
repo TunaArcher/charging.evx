@@ -28,15 +28,15 @@ $(function () {
   //     "&a=GVN";
   //   jsonMarkerType[1088] = "s";
 
-  jsonMarker[40] = "https://www.ginkachargepoint.com/map/iconOn.png";
+  jsonMarker[40] = "https://cdn.discordapp.com/attachments/1265248054748119071/1268514664279703562/EVX_Icon2.webp?ex=66acb3d7&is=66ab6257&hm=739b97628c8e29397233183c1a7c916128dcc067e5166852918d1ac11239b341&";
   jsonMarkerType[40] = "s";
-  jsonMarker[41] = "https://www.ginkachargepoint.com/map/iconOn.png";
+  jsonMarker[41] = "https://cdn.discordapp.com/attachments/1265248054748119071/1268514664279703562/EVX_Icon2.webp?ex=66acb3d7&is=66ab6257&hm=739b97628c8e29397233183c1a7c916128dcc067e5166852918d1ac11239b341&";
   jsonMarkerType[41] = "s";
-  jsonMarker[49] = "https://www.ginkachargepoint.com/map/iconOn.png";
+  jsonMarker[49] = "https://cdn.discordapp.com/attachments/1265248054748119071/1268514664279703562/EVX_Icon2.webp?ex=66acb3d7&is=66ab6257&hm=739b97628c8e29397233183c1a7c916128dcc067e5166852918d1ac11239b341&";
   jsonMarkerType[49] = "s";
-  jsonMarker[76] = "https://www.ginkachargepoint.com/map/iconOn.png";
+  jsonMarker[76] = "https://cdn.discordapp.com/attachments/1265248054748119071/1268514664279703562/EVX_Icon2.webp?ex=66acb3d7&is=66ab6257&hm=739b97628c8e29397233183c1a7c916128dcc067e5166852918d1ac11239b341&";
   jsonMarkerType[76] = "s";
-  jsonMarker[1088] = "https://www.ginkachargepoint.com/map/iconOn.png";
+  jsonMarker[1088] = "https://cdn.discordapp.com/attachments/1265248054748119071/1268514664279703562/EVX_Icon2.webp?ex=66acb3d7&is=66ab6257&hm=739b97628c8e29397233183c1a7c916128dcc067e5166852918d1ac11239b341&";
   jsonMarkerType[1088] = "s";
 
   $("#stationName").select2({

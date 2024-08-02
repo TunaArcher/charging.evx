@@ -1357,7 +1357,7 @@ function getInfoWindowContentDetail(location, marker) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                            ${btnWebsite}${btnIot}${btnCall}${btnIssueReport}
                             <a href="${googleMapsUrl}" target="_blank" class="btn btn-outline-primary btn-sm" title="นำทาง"><i class="fas fa-directions" style="color: #635bff;"></i> <span class="small">นำทาง<span></a>
                             <button type="button" class="btn btn-primary btn-sm btnCheckIn" data-url="${checkInUrl}"><i class="fa fa-qrcode"></i> <span class="small">เช็คอิน<span></button>
