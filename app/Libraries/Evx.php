@@ -34,8 +34,32 @@ class Evx
     }
 
     /*********************************************************************
-     * USER
+     * 1. Authentication
      */
+
+    /*********************************************************************
+     * 2. User | ระบบสมาชิก
+     */
+
+    // Get data User
+    public function user($id)
+    {
+        try {
+            $response = $this->http->request('GET', $this->baseURL . '/user/' . $id);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::user error {username} {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
 
     // Create User
     public function createUser($data)
@@ -59,26 +83,6 @@ class Evx
             return false;
         } catch (\Exception $e) {
             log_message('error', 'EVX::createUser error {username} {message}', ['username' => $this->credential['agent'] . $data['username'], 'message' => 'message:' . $e->getMessage()]);
-
-            return false;
-        }
-    }
-
-    // Get data User
-    public function user($id)
-    {
-        try {
-            $response = $this->http->request('GET', $this->baseURL . '/user/' . $id);
-
-            $data = json_decode($response->getBody());
-
-            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
-
-            if ($statusCode === 0 || $statusCode === 200) return $data->data;
-
-            return false;
-        } catch (\Exception $e) {
-            log_message('error', 'EVX::user error {username} {message}', ['message' => 'message:' . $e->getMessage()]);
 
             return false;
         }
