@@ -27,7 +27,7 @@
         <div class="card">
             <ul class="nav nav-pills user-profile-tab" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-3" id="pills-account-tab" data-bs-toggle="pill" data-bs-target="#pills-account" type="button" role="tab" aria-controls="pills-account" aria-selected="true">
+                    <button class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-3" id="personal-detail-tab" data-bs-toggle="pill" data-bs-target="#personal-detail" type="button" role="tab" aria-controls="personal-detail" aria-selected="true">
                         <i class="ti ti-user-circle me-2 fs-6"></i>
                         <span class="d-none d-md-block">ข้อมูลส่วนตัว</span>
                     </button>
@@ -53,7 +53,7 @@
             </ul>
             <div class="card-body">
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab" tabindex="0">
+                    <div class="tab-pane fade show active" id="personal-detail" role="tabpanel" aria-labelledby="personal-detail-tab" tabindex="0">
                         <div class="row">
                             <div class="col-lg-6 d-flex align-items-stretch">
                                 <div class="card w-100 border position-relative overflow-hidden">
@@ -63,8 +63,8 @@
                                         <div class="text-center">
                                             <img src="../assets/images/profile/user-1.jpg" alt="matdash-img" class="img-fluid rounded-circle" width="120" height="120">
                                             <div class="d-flex align-items-center justify-content-center my-4 gap-6">
-                                                <button class="btn btn-primary">Upload</button>
-                                                <button class="btn bg-danger-subtle text-danger">Reset</button>
+                                                <button class="btn btn-warning">เลือกรูป ...</button>
+                                                <button class="btn bg-success-subtle text-success">บันทึก</button>
                                             </div>
                                             <p class="mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                                         </div>
@@ -74,52 +74,32 @@
                             <div class="col-lg-6 d-flex align-items-stretch">
                                 <div class="card w-100 border position-relative overflow-hidden">
                                     <div class="card-body p-4">
-                                        <h4 class="card-title">Change Password</h4>
-                                        <p class="card-subtitle mb-4">To change your password please confirm here</p>
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">Current Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" value="12345678910">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputPassword2" class="form-label">New Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword2" value="12345678910">
-                                            </div>
-                                            <div>
-                                                <label for="exampleInputPassword3" class="form-label">Confirm Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword3" value="12345678910">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card w-100 border position-relative overflow-hidden mb-0">
-                                    <div class="card-body p-4">
-                                        <h4 class="card-title">ข้อมูลส่วนบุคคล</h4>
+                                    <h4 class="card-title">ข้อมูลส่วนบุคคล</h4>
                                         <p class="card-subtitle mb-4">To change your personal detail , edit and save from here</p>
-                                        <form>
+                                        <form id="formPersonalDetail">
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label for="" class="form-label">ชื่อ - นามสกุล</label>
-                                                        <input type="text" class="form-control" id="" placeholder="">
-                                                    </div>
+                                                <div class="col-lg-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">เบอร์โทรศัพท์</label>
-                                                        <input type="text" class="form-control" id="" placeholder="">
+                                                        <input type="text" class="form-control" id="" placeholder="" name="phone" disabled>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">อีเมล</label>
-                                                        <input type="text" class="form-control" id="" placeholder="">
+                                                        <input type="text" class="form-control" id="" placeholder="" name="email" disabled>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อ - นามสกุล</label>
+                                                        <input type="text" class="form-control" id="" placeholder="" name="fullname">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="d-flex align-items-center justify-content-end mt-4 gap-6">
-                                                        <button class="btn btn-primary">Save</button>
-                                                        <button class="btn bg-danger-subtle text-danger">Cancel</button>
+                                                    <div class="d-flex align-items-center justify-content-end mt-4">
+                                                        <button class="btn btn-primary btnSave w-100">ยืนยัน</button>
                                                     </div>
                                                 </div>
                                             </div>

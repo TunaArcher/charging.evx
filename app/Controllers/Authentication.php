@@ -120,7 +120,6 @@ class Authentication extends BaseController
 
             $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
             $UserLoginDetailModel->updateUserLoginDetailByID(session()->get('login_detail_id'), ['active' => '0']);
-
           
             logger_store([
                 'user_id' => session()->get('userID'),

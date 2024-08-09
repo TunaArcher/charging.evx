@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Evx;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -38,6 +39,11 @@ abstract class BaseController extends Controller
     protected $helpers = ['array', 'custom_helper', 'my_hashids', 'user_logger'];
 
     /**
+     * @var Askmebet
+     */
+    protected $evxapi;
+
+    /**
      * Constructor.
      */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -48,5 +54,11 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+        $this->evxapi = new Evx([
+            'baseUrl'   => getenv('EVX_API'),
+            'system'    => getenv('EVX_SYSTEM'),
+            'key'       => getenv('EVX_KEY')
+        ]);
     }
 }

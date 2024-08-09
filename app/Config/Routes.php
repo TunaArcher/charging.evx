@@ -69,6 +69,8 @@ $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
 $routes->group('profile', ['filter' => 'userAuth'], function ($routes) {
     $routes->get('index', 'Profile::index');
     $routes->get('history', 'Profile::history');
+    $routes->post('update', 'Profile::update');
+    $routes->get('data', 'Profile::data');
 });
 
 // Report

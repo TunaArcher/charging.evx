@@ -10,61 +10,73 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed fs-4 fw-semibold shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                EVX Question 1 ?
+                                ข้อมูลที่ใช้สำหรับการลงทะเบียน EVX
                             </button>
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body fw-normal">
-                                Admin Dashboard is the backend interface of a website or an application that helps to manage the
-                                website's overall content and settings. It is widely used by the site owners to keep track of
-                                their website,
-                                make changes to their content, and more.
+                                ใช้อีเมลและหมายเลขโทรศัพท์มือถือเท่านั้น
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingTwo">
                             <button class="accordion-button collapsed fs-4 fw-semibold shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                EVX Question 2 ?
+                                ช่องทางการชำระค่าบริการมีอะไรบ้าง
                             </button>
                         </h2>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body fw-normal">
-                                Admin dashboard template should include user & SEO friendly design with a variety of components
-                                and
-                                application designs to help create your own web application with ease. This could include
-                                customization
-                                options, technical support and about 6 months of future updates.
+                                สามารถชำระค่าบริการผ่านการตัดเงินจาก EVX Wallet
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed fs-4 fw-semibold shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                EVX Question 3 ?
+                                อัตราค่าบริการคิดอย่างไร?
                             </button>
                         </h2>
                         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body fw-normal">
-                                Adminmart offers high-quality templates that are easy to use and fully customizable. With over
-                                101,801
-                                happy customers & trusted by 10,000+ Companies. AdminMart is recognized as the leading online
-                                source
-                                for buying admin templates.
+                                อัตราค่าบริการแต่ละสถานีชาร์จจะไม่เท่ากัน โดยสามารถตรวจสอบผ่านแอปพลิเคชั่น EVX ได้.
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingfour">
                             <button class="accordion-button collapsed fs-4 fw-semibold shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
-                                EVX Question 4 ?
+                                ฉันจะ “ขอเงินคืน” จากที่เติมไปได้หรือไม่?
                             </button>
                         </h2>
                         <div id="flush-collapsefour" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body fw-normal">
-                                There is no money back guarantee in most companies, but if you are unhappy with our product,
-                                Adminmart
-                                gives you a 100% money back guarantee.
+                                ปัจจุบันระบบยังไม่รองรับการ “คืนเงิน” ที่ท่านได้เติมไว้ในระบบได้.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingfour">
+                            <button class="accordion-button collapsed fs-4 fw-semibold shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour2" aria-expanded="false" aria-controls="flush-collapsefour2">
+                                ทำอย่างไร หากเติมเงินแล้วแต่เงินไม่เข้า?
+                            </button>
+                        </h2>
+                        <div id="flush-collapsefour2" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fw-normal">
+                                ตรวจสอบว่าระบบหักเงินจากบัญชีจริงหรือไม่ หากระบบหักเงินจริงให้รีเฟรชแอปใหม่อีกครั้ง ถ้าหากเงินไม่เข้าระบบจริงให้ติดต่อเจ้าหน้าที่.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingfour">
+                            <button class="accordion-button collapsed fs-4 fw-semibold shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour3" aria-expanded="false" aria-controls="flush-collapsefour3">
+                                Application ชื่ออะไร และ ดาวน์โหลดได้จากที่ไหน?
+                            </button>
+                        </h2>
+                        <div id="flush-collapsefour3" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body fw-normal">
+                                Application “EVX” สามารถดาวน์โหลดแอปพลิเคชั่น “EVX” ได้จาก Google Play (สำหรับ Andriod) หรือ App Store (สำหรับ ios).
                             </div>
                         </div>
                     </div>
