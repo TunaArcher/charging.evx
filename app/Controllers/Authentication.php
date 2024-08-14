@@ -16,7 +16,6 @@ class Authentication extends BaseController
         try {
 
             // ============================================== TEST
-            
             $userID = 2;
             $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
             $userloginDetailID = $UserLoginDetailModel->insertuserLoginDetail([
@@ -43,7 +42,7 @@ class Authentication extends BaseController
                 ->setJSON($response);
             // ============================================== TEST
 
-            
+
             if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
 
             $UserModel = new \App\Models\UserModel();
@@ -120,7 +119,7 @@ class Authentication extends BaseController
 
             $UserLoginDetailModel = new \App\Models\UserLoginDetailModel();
             $UserLoginDetailModel->updateUserLoginDetailByID(session()->get('login_detail_id'), ['active' => '0']);
-          
+
             logger_store([
                 'user_id' => session()->get('userID'),
                 'username' => session()->get('username'),

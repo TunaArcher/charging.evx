@@ -104,7 +104,7 @@
                               <a href="<?php echo base_url(); ?>" class="text-nowrap logo-img d-block mb-4 w-100">
                                 <img src="<?php echo base_url('assets/images/logos/logo.png'); ?>" class="dark-logo" alt="Logo-Dark" />
                               </a>
-                              <h2 class="lh-base mb-4">Let's get you signed in</h2>
+                              <h2 class="lh-base mb-4">เข้าสู่ระบบ EVX Charging</h2>
                               <div class="position-relative text-center my-4">
                                 <p class="mb-0 fs-12 px-3 d-inline-block bg-body z-index-5 position-relative">sign in with
                                   email
@@ -113,12 +113,12 @@
                               </div>
                               <form id="loginForm" method="post">
                                 <div class="mb-3">
-                                  <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                                  <label for="exampleInputEmail1" class="form-label">อีเมล</label>
                                   <input name="username" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-4">
                                   <div class="d-flex align-items-center justify-content-between">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <label for="exampleInputPassword1" class="form-label">รหัสผ่าน</label>
                                     <a class="text-primary link-dark fs-2" href="">Forgot
                                       Password ?</a>
                                   </div>
@@ -132,8 +132,8 @@
                                     </label>
                                   </div>
                                 </div>
-                                <button id="btn-login" class="btn btn-info w-100 py-8 mb-2 rounded-1">Sign In</button>
-                                <a href="<?php echo base_url('/register'); ?>" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Register</a>
+                                <button id="btn-login" class="btn btn-info w-100 py-8 mb-2 rounded-1">เข้าสู่ระบบ</button>
+                                <a href="<?php echo base_url('/register'); ?>" class="btn btn-dark w-100 py-8 mb-4 rounded-1">สมัครสมาชิก</a>
                                 <footer class="text-center text-lg-start bg-light text-muted">
                                   <!-- Copyright -->
                                   <div class="text-center small pt-3 pb-3 footer-container">
@@ -141,7 +141,7 @@
                                     <!-- <br><a href="https://geonine.io/evpublic/instruction/deactivate_account_th.png" target="_blank" class="no-style"><i class="fa fa-book"></i> การลบบัญชีผู้ใช้งาน</a> -->
                                     <hr>
                                     © 2024 -
-                                    <a class="text-reset fw-bold" href="#">EVX Co.,Ltd.</a>
+                                    <a class="text-reset fw-bold" href="#">EVX</a>
                                     <br>
                                     <a href="#" class="no-style me-2 small" onclick="showTermModal(); return false;">ข้อตกลงและเงื่อนไขการให้บริการ</a>
                                     <span>|</span>

@@ -67,10 +67,8 @@ class Evx
         try {
             $response = $this->http->request('POST', $this->baseURL . '/user/create/', [
                 'json' => [
-                    'phone' => $data['phone'],
-                    'password' => $data['password'],
-                    'fullname' => $data['fullname'],
-                    'email' => $data['email']
+                    'email' => $data['email'],
+                    'password' => $data['password']
                 ]
             ]);
 
@@ -78,7 +76,9 @@ class Evx
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
 
-            if ($statusCode === 0) return true;
+            if ($statusCode === 999) return $data;
+
+            if ($statusCode === 0 || $statusCode === 201) return $data;
 
             return false;
         } catch (\Exception $e) {

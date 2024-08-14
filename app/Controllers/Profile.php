@@ -19,7 +19,6 @@ class Profile extends BaseController
         */
 
         // Model
-
     }
 
     public function index()
