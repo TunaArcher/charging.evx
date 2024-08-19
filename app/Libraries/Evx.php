@@ -7,25 +7,27 @@ class Evx
     private $http;
     private $baseURL;
     private $headers;
-    private $credential = [];
+    private $credentials = [];
+    private $accessToken;
+    private $refreshToken;
     private $debug = false;
 
-    public function __construct($credential = [])
+    public function __construct($config)
     {
-        $this->headers = [
-            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-        ];
+        $this->baseURL = $config['baseUrl'];
 
-        $this->baseURL = $credential['baseUrl'];
+        $this->accessToken = $config['accessToken'] ?? '';
+        $this->refreshToken = $config['refreshToken'] ?? '';
 
-        $this->credential = [
-            'system'        => $credential['system'],
-            'key'           => $credential['key']
-        ];
+        $this->setCredentials($config['system'], $config['key']);
 
-        $this->http = new \GuzzleHttp\Client([
-            'headers' => $this->headers,
-        ]);
+        $this->http = new \GuzzleHttp\Client();
+    }
+
+    private function setCredentials($system, $key)
+    {
+        $this->credentials['system'] = $system;
+        $this->credentials['key'] = $key;
     }
 
     public function setDebug($value)
@@ -37,6 +39,72 @@ class Evx
      * 1. Authentication
      */
 
+    // Login
+    public function login($data)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/auth/login/';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'json' => [
+                    'email' => $data['email'],
+                    'password' => $data['password']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::login error {username} {message}', ['username' => $data['email'], 'message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    // Token
+    public function refreshToken()
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/auth/refresh/';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->refreshToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) {
+
+                $this->accessToken = $data->accessToken;
+                $this->refreshToken = $data->refreshToken;
+
+                session()->set([
+                    'accessToken' => $this->accessToken,
+                    'refreshToken' => $this->refreshToken,
+                ]);
+
+                return true;
+            }
+
+            return redirect()->to('/logout');
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::login error {username} {message}', ['refresh' => $this->credentials['agent'] . $data['username'], 'message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
     /*********************************************************************
      * 2. User | ระบบสมาชิก
      */
@@ -45,11 +113,25 @@ class Evx
     public function user($id)
     {
         try {
-            $response = $this->http->request('GET', $this->baseURL . '/user/' . $id);
+
+            $endPoint = $this->baseURL . '/user/' . $id;
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
 
             $data = json_decode($response->getBody());
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 401) {
+
+                $refreshToken = $this->refreshToken();
+
+                if ($refreshToken) $this->user($id);
+            }
 
             if ($statusCode === 0 || $statusCode === 200) return $data->data;
 
@@ -65,7 +147,10 @@ class Evx
     public function createUser($data)
     {
         try {
-            $response = $this->http->request('POST', $this->baseURL . '/user/create/', [
+
+            $endPoint = $this->baseURL . '/user/create/';
+
+            $response = $this->http->request('POST', $endPoint, [
                 'json' => [
                     'email' => $data['email'],
                     'password' => $data['password']
@@ -82,7 +167,7 @@ class Evx
 
             return false;
         } catch (\Exception $e) {
-            log_message('error', 'EVX::createUser error {username} {message}', ['username' => $this->credential['agent'] . $data['username'], 'message' => 'message:' . $e->getMessage()]);
+            log_message('error', 'EVX::createUser error {username} {message}', ['username' => $this->credentials['agent'] . $data['username'], 'message' => 'message:' . $e->getMessage()]);
 
             return false;
         }
@@ -92,7 +177,13 @@ class Evx
     public function changePasswordUser($username, $password)
     {
         try {
-            $response = $this->http->request('POST', $this->baseURL . '/user/changePassword/', [
+
+            $endPoint = $this->baseURL . '/user/changePassword/';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
                 'json' => [
                     'username' => $username,
                     'password' => $password
@@ -102,6 +193,13 @@ class Evx
             $data = json_decode($response->getBody());
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 401) {
+
+                $refreshToken = $this->refreshToken();
+
+                if ($refreshToken) $this->changePasswordUser($username, $password);
+            }
 
             if ($statusCode === 0) return true;
 
@@ -116,7 +214,13 @@ class Evx
     public function updateUser($id, $data)
     {
         try {
-            $response = $this->http->request('POST', $this->baseURL . '/user/update/', [
+
+            $endPoint = $this->baseURL . '/user/update/';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
                 'json' => [
                     'id' => $id,
                     'fullname' => $data['fullname']
@@ -126,6 +230,13 @@ class Evx
             $data = json_decode($response->getBody());
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 401) {
+
+                $refreshToken = $this->refreshToken();
+
+                if ($refreshToken) $this->updateUser($id, $data);
+            }
 
             if ($statusCode === 0 || $statusCode === 200) return true;
 

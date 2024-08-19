@@ -41,7 +41,7 @@ abstract class BaseController extends Controller
     /**
      * @var Askmebet
      */
-    protected $evxapi;
+    protected $evxApi;
 
     /**
      * Constructor.
@@ -55,7 +55,7 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
 
-        $this->evxapi = new Evx([
+        $this->evxApi = new Evx([
             'baseUrl'   => getenv('EVX_API'),
             'system'    => getenv('EVX_SYSTEM'),
             'key'       => getenv('EVX_KEY')

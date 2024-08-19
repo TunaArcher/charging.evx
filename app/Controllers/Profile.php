@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Evx;
+
 class Profile extends BaseController
 {
+
     public function __construct()
     {
         /*
@@ -12,13 +15,19 @@ class Profile extends BaseController
         | -------------------------------------------------------------------------
         */
 
+        $this->evxApi = new Evx([
+            'baseUrl' => getenv('EVX_API'),
+            'system' => getenv('EVX_SYSTEM'),
+            'key' => getenv('EVX_KEY'),
+            'accessToken' => session()->get('accessToken'),
+            'refreshToken' => session()->get('refreshToken')
+        ]);
+
         /*
         | -------------------------------------------------------------------------
         | SET UTILITIES
         | -------------------------------------------------------------------------
         */
-
-        // Model
     }
 
     public function index()
@@ -55,23 +64,24 @@ class Profile extends BaseController
 
             $fullname = $this->request->getVar('fullname');
 
-            $update = $this->evxapi->updateUser(session()->get('userID'), [
+            $update = $this->evxApi->updateUser(session()->get('userID'), [
                 'fullname' => $fullname
             ]);
 
             if ($update) {
-                logger_store([
-                    'user_id' => session()->get('userID'),
-                    'username' => session()->get('username'),
-                    'event' => 'อัพเดท',
-                    'detail' => '[อัพเดท] ข้อมูลส่วนตัว',
-                    'ip' => $this->request->getIPAddress()
-                ]);
+                // logger_store([
+                //     'user_id' => session()->get('userID'),
+                //     'username' => session()->get('username'),
+                //     'event' => 'อัพเดท',
+                //     'detail' => '[อัพเดท] ข้อมูลส่วนตัว',
+                //     'ip' => $this->request->getIPAddress()
+                // ]);
                 $status = 200;
                 $response['success'] = 1;
                 $response['message'] = 'แก้ไข ข้อมูลส่วนตัว สำเร็จ';
 
-                $user = $this->evxapi->user(session()->get('userID'));
+                $user = $this->evxApi->user(session()->get('userID'));
+
                 $response['data'] = $user;
             } else {
                 $status = 200;
@@ -100,9 +110,10 @@ class Profile extends BaseController
 
                 $status = 200;
                 $response['success'] = 1;
-                $response['message'] = 'แก้ไข ข้อมูลส่วนตัว สำเร็จ';
+                $response['message'] = '';
 
-                $user = $this->evxapi->user(session()->get('userID'));
+                $user = $this->evxApi->user(session()->get('userID'));
+
                 $response['data'] = $user;
             } else {
                 $status = 200;

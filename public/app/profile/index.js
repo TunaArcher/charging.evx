@@ -159,9 +159,8 @@ $(document).ready(function () {
     handleTabs() {
       $('button[role="tab"]').on("shown.bs.tab", function (e) {
         var selectedTabId = e.target.id;
-
         switch (selectedTabId) {
-          case "personal-detail":
+          case "personal-detail-tab":
             PROFILE.getUserData();
             break;
         }

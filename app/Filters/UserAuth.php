@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Libraries\Evx;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
@@ -11,8 +12,12 @@ class UserAuth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // Fix Bug แก้ไขปัญหากรณีพนักงานถูกลบไอดีแล้ว ให้ออกจากระบบทันที
-        $UserModel = new \App\Models\UserModel();
-        $user = $UserModel->getUserByID(session()->get('userID'));
+        $evxApi = new Evx([
+            'baseUrl'   => getenv('EVX_API'),
+            'system'    => getenv('EVX_SYSTEM'),
+            'key'       => getenv('EVX_KEY')
+        ]);
+        $user = $evxApi->user(session()->get('userID'));
 
         if (!$user) {
             session()->setFlashdata(['session_expired' => 'เซ็นซันหมดอายุ กรุณาล็อคอินอีกครั้ง']);
