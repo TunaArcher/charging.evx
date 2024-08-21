@@ -66,9 +66,7 @@ class Evx
                     ]);
 
                     return $response;
-                }
-
-                else {
+                } else {
                     // TODO:: Handle มีปัญหาเมื่อขอ Refresh Token ไม่ได้ ซึ่งอาจจะเกิดจาก Server ดับ หรืออะไรก็แล้วแต่
                 }
             }
@@ -158,7 +156,7 @@ class Evx
 
             return redirect()->to('/logout');
         } catch (\Exception $e) {
-            log_message('error', 'EVX::login error {username} {message}', ['refresh' => $this->credentials['agent'] . $data['username'], 'message' => 'message:' . $e->getMessage()]);
+            log_message('error', 'EVX::login error {username} {message}', ['refresh' => $this->refreshToken, 'message' => 'message:' . $e->getMessage()]);
 
             return false;
         }
