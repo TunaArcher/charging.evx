@@ -38,14 +38,14 @@ class Authentication extends BaseController
                     'refreshToken' => $user->refreshToken,
                 ]);
 
-                logger_store([
-                    'user_id' => $user->id,
-                    'username' => $user->email,
-                    'email' => $user->email,
-                    'event' => 'เข้าสู่ระบบ',
-                    'detail' => 'เข้าสู่ระบบ EVX',
-                    'ip' => $this->request->getIPAddress()
-                ]);
+                // logger_store([
+                //     'user_id' => $user->id,
+                //     'username' => $user->email,
+                //     'email' => $user->email,
+                //     'event' => 'เข้าสู่ระบบ',
+                //     'detail' => 'เข้าสู่ระบบ EVX',
+                //     'ip' => $this->request->getIPAddress()
+                // ]);
 
                 $status = 200;
                 $response['success'] = 1;

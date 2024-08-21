@@ -13,9 +13,11 @@ class UserAuth implements FilterInterface
     {
         // Fix Bug แก้ไขปัญหากรณีพนักงานถูกลบไอดีแล้ว ให้ออกจากระบบทันที
         $evxApi = new Evx([
-            'baseUrl'   => getenv('EVX_API'),
-            'system'    => getenv('EVX_SYSTEM'),
-            'key'       => getenv('EVX_KEY')
+            'baseUrl' => getenv('EVX_API'),
+            'system' => getenv('EVX_SYSTEM'),
+            'key' => getenv('EVX_KEY'),
+            'accessToken' => session()->get('accessToken'),
+            'refreshToken' => session()->get('refreshToken'),
         ]);
         $user = $evxApi->user(session()->get('userID'));
 
