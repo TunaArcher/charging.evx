@@ -184,8 +184,6 @@ class Evx
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
 
-            if ($statusCode === 999) return false;
-
             if ($statusCode === 0 || $statusCode === 200) return $data->data;
 
             return false;
