@@ -24,7 +24,7 @@ class Filters extends BaseConfig
         'userNoAuth' => \App\Filters\UserNoAuth::class,
         'userAuth' => [
             \App\Filters\UserAuth::class,
-            \App\Filters\UserActivity::class
+            // \App\Filters\UserActivity::class
         ],
     ];
 

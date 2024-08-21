@@ -2,6 +2,13 @@
 
 namespace App\Libraries;
 
+use \GuzzleHttp\Client;
+use \GuzzleHttp\Handler\CurlHandler;
+use \GuzzleHttp\HandlerStack;
+use \GuzzleHttp\Middleware;
+use \Psr\Http\Message\RequestInterface;
+use \Psr\Http\Message\ResponseInterface;
+
 class Evx
 {
     private $http;
@@ -14,14 +21,64 @@ class Evx
 
     public function __construct($config)
     {
+        $this->setCredentials($config['system'], $config['key']);
+
         $this->baseURL = $config['baseUrl'];
 
         $this->accessToken = $config['accessToken'] ?? '';
+
         $this->refreshToken = $config['refreshToken'] ?? '';
 
-        $this->setCredentials($config['system'], $config['key']);
+        $stack = new HandlerStack();
 
-        $this->http = new \GuzzleHttp\Client();
+        $stack->setHandler(new CurlHandler());
+
+        $stack->push(Middleware::mapRequest(function (RequestInterface $Request) {
+            $request = $Request;
+
+            $this->lastRequest = $request;
+
+            return $request;
+        }));
+
+        $stack->push(Middleware::mapResponse(function (ResponseInterface $Response) {
+
+            $statusCode = $Response->getStatusCode();
+
+            if ($statusCode === 401) {
+
+                $refreshToken = $this->refreshToken();
+
+                if ($refreshToken) {
+
+                    $lastRequest = $this->lastRequest;
+
+                    $url = (string) $lastRequest->getUri();
+                    $method = (string) $lastRequest->getMethod();
+                    // $header = $lastRequest->getHeaders();
+                    $body = $lastRequest->getBody();
+
+                    $response = $this->http->request($method, $url, [
+                        'headers' => [
+                            'Authorization' => "Bearer " . $this->refreshToken
+                        ],
+                        'body' => $body,
+                    ]);
+
+                    return $response;
+                }
+
+                else {
+                    // TODO:: Handle มีปัญหาเมื่อขอ Refresh Token ไม่ได้ ซึ่งอาจจะเกิดจาก Server ดับ หรืออะไรก็แล้วแต่
+                }
+            }
+
+            return $Response;
+        }));
+
+        $option = ['handler' => $stack];
+
+        $this->http = new Client($option);
     }
 
     private function setCredentials($system, $key)
@@ -72,9 +129,11 @@ class Evx
     {
         try {
 
+            $http = new \GuzzleHttp\Client();
+
             $endPoint = $this->baseURL . '/auth/refresh/';
 
-            $response = $this->http->request('POST', $endPoint, [
+            $response = $http->request('POST', $endPoint, [
                 'headers' => [
                     'Authorization' => "Bearer " . $this->refreshToken
                 ],
@@ -86,8 +145,8 @@ class Evx
 
             if ($statusCode === 0 || $statusCode === 200) {
 
-                $this->accessToken = $data->accessToken;
-                $this->refreshToken = $data->refreshToken;
+                $this->accessToken = $data->data->accessToken;
+                $this->refreshToken = $data->data->refreshToken;
 
                 session()->set([
                     'accessToken' => $this->accessToken,
@@ -113,7 +172,6 @@ class Evx
     public function user($id)
     {
         try {
-
             $endPoint = $this->baseURL . '/user/' . $id;
 
             $response = $this->http->request('GET', $endPoint, [
@@ -126,12 +184,7 @@ class Evx
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
 
-            if ($statusCode === 401) {
-
-                $refreshToken = $this->refreshToken();
-
-                if ($refreshToken) $this->user($id);
-            }
+            if ($statusCode === 999) return false;
 
             if ($statusCode === 0 || $statusCode === 200) return $data->data;
 
@@ -194,13 +247,6 @@ class Evx
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
 
-            if ($statusCode === 401) {
-
-                $refreshToken = $this->refreshToken();
-
-                if ($refreshToken) $this->changePasswordUser($username, $password);
-            }
-
             if ($statusCode === 0) return true;
 
             return false;
@@ -230,13 +276,6 @@ class Evx
             $data = json_decode($response->getBody());
 
             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
-
-            if ($statusCode === 401) {
-
-                $refreshToken = $this->refreshToken();
-
-                if ($refreshToken) $this->updateUser($id, $data);
-            }
 
             if ($statusCode === 0 || $statusCode === 200) return true;
 

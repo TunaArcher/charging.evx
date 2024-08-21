@@ -22,6 +22,7 @@ class UserAuth implements FilterInterface
         $user = $evxApi->user(session()->get('userID'));
 
         if (!$user) {
+            session()->destroy();
             session()->setFlashdata(['session_expired' => 'เซ็นซันหมดอายุ กรุณาล็อคอินอีกครั้ง']);
             return redirect()->to('/');
         }

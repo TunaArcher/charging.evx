@@ -56,9 +56,11 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
 
         $this->evxApi = new Evx([
-            'baseUrl'   => getenv('EVX_API'),
-            'system'    => getenv('EVX_SYSTEM'),
-            'key'       => getenv('EVX_KEY')
+            'baseUrl' => getenv('EVX_API'),
+            'system' => getenv('EVX_SYSTEM'),
+            'key' => getenv('EVX_KEY'),
+            'accessToken' => session()->get('accessToken'),
+            'refreshToken' => session()->get('refreshToken')
         ]);
     }
 }

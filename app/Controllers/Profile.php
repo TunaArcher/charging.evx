@@ -15,14 +15,6 @@ class Profile extends BaseController
         | -------------------------------------------------------------------------
         */
 
-        $this->evxApi = new Evx([
-            'baseUrl' => getenv('EVX_API'),
-            'system' => getenv('EVX_SYSTEM'),
-            'key' => getenv('EVX_KEY'),
-            'accessToken' => session()->get('accessToken'),
-            'refreshToken' => session()->get('refreshToken')
-        ]);
-
         /*
         | -------------------------------------------------------------------------
         | SET UTILITIES
