@@ -186,7 +186,7 @@ class Evx
 
             return false;
         } catch (\Exception $e) {
-            log_message('error', 'EVX::user error {username} {message}', ['message' => 'message:' . $e->getMessage()]);
+            log_message('error', 'EVX::user error {message}', ['message' => 'message:' . $e->getMessage()]);
 
             return false;
         }
@@ -259,6 +259,7 @@ class Evx
 
             $endPoint = $this->baseURL . '/user/update/';
 
+            // TODO:: HANDLE
             $response = $this->http->request('POST', $endPoint, [
                 'headers' => [
                     'Authorization' => "Bearer " . $this->accessToken
@@ -281,4 +282,458 @@ class Evx
             return false;
         }
     }
+
+    /*********************************************************************
+     * 3. Owner Station | เจ้าของสถานี
+     */
+
+    public function getAllOwnerStations()
+    {
+        try {
+            $endPoint = $this->baseURL . '/owner-station/';
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getAllOwnerStations error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getOwnerStation($id)
+    {
+        try {
+            $endPoint = $this->baseURL . '/owner-station/' . $id;
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getOwnerStation error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function updateOwnerStation($id, $data)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/owner-station/update/';
+
+            // TODO:: HANDLE
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'id' => $id,
+                    'description' => $data['description']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return true;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::updateOwnerStation error {message}', ['message' => 'message:' . $e->getMessage()]);
+            return false;
+        }
+    }
+
+    /*********************************************************************
+     * 4. Stations | สถานี
+     */
+
+    public function getAllStations()
+    {
+        try {
+            $endPoint = $this->baseURL . '/station/';
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getAllStations error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getStation($id)
+    {
+        try {
+            $endPoint = $this->baseURL . '/station/' . $id;
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getStation error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function updateStation($id, $data)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/station/update/';
+
+            // TODO:: HANDLE
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'id' => $id,
+                    'description' => $data['description']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return true;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::updateStation error {message}', ['message' => 'message:' . $e->getMessage()]);
+            return false;
+        }
+    }
+
+    /*********************************************************************
+     * 5. Charge Point | ตู้ชาจ
+     */
+
+    public function getAllChargePoints()
+    {
+        try {
+            $endPoint = $this->baseURL . '/charge-point/';
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getAllChargePoints error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getChargePoint($id)
+    {
+        try {
+            $endPoint = $this->baseURL . '/charge-point/' . $id;
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getChargePoint error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getChargePointByStatus($status)
+    {
+        try {
+            $endPoint = $this->baseURL . '/charge-point/';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'status' => $status
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getChargePointByStatus error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function updateChargePoint($id, $data)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/charge-point/update/';
+
+            // TODO:: HANDLE
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'id' => $id,
+                    'status' => $data['status']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return true;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::updateChargePoint error {message}', ['message' => 'message:' . $e->getMessage()]);
+            return false;
+        }
+    }
+
+    /*********************************************************************
+     * 6. Booking ...
+     */
+
+    /*********************************************************************
+     * 7. Topup | ระบบเติมเงิน
+     */
+
+    public function getAllDeposit()
+    {
+        try {
+            $endPoint = $this->baseURL . '/deposit/';
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getAllDeposit error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getDeposit($id)
+    {
+        try {
+            $endPoint = $this->baseURL . '/deposit/' . $id;
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getDeposit error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function updateDeposit($id, $data)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/deposit/update/';
+
+            // TODO:: HANDLE
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'id' => $id,
+                    'status' => $data['status']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return true;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::updateDeposit error {message}', ['message' => 'message:' . $e->getMessage()]);
+            return false;
+        }
+    }
+
+    public function getAllWithdraw()
+    {
+        try {
+            $endPoint = $this->baseURL . '/withdraw/';
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getAllWithdraw error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getWithdraw($id)
+    {
+        try {
+            $endPoint = $this->baseURL . '/withdraw/' . $id;
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getWithdraw error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function updateWithdraw($id, $data)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/withdraw/update/';
+
+            // TODO:: HANDLE
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'id' => $id,
+                    'status' => $data['status']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return true;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::updateWithdraw error {message}', ['message' => 'message:' . $e->getMessage()]);
+            return false;
+        }
+    }
+
+    /*********************************************************************
+     * 8. Report | รายงาน & ประวัติ
+     */
+
+     // TODO:: HANDLE
 }
