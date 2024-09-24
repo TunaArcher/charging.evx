@@ -1,30 +1,12 @@
 <div class="body-wrapper">
     <div class="container-fluid">
-        <div class="card card-body py-3">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="d-sm-flex align-items-center justify-space-between">
-                        <h4 class="mb-4 mb-md-0 card-title">Start Charging</h4>
-                        <nav aria-label="breadcrumb" class="ms-auto">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item d-flex align-items-center">
-                                    <a class="text-muted text-decoration-none d-flex" href="#">
-                                        <iconify-icon icon="solar:watch-square-minimalistic-charge-line-duotone" class="fs-6"></iconify-icon>
-                                    </a>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card" id="scan_station">
             <div class="card-body">
                 <div class="justify-content-between align-items-center gap-6 mb-9">
-                    <form class="position-relative">
-                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh-charger-station" placeholder="Enter charge point no.">
+                    <div class="position-relative">
+                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh-charger-station" placeholder="Enter charge point no." onkeydown="searchStation(this)">
                         <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
-                    </form>
+                    </div>
                 </div>
                 <div class="text-center">
                     <p class="text-center badge fw-medium fs-2 bg-primary-subtle text-primary">Or</p>
@@ -53,266 +35,271 @@
             <div class="card">
                 <div class="card-body p-4">
                     <div class="wizard-content">
-                        <form action="#" class="tab-wizard wizard-circle">
+                        <form action="#" class="tab-charger wizard wizard-circle">
                             <!-- Step 1 -->
                             <h6>1. SELECT CONNECTOR</h6>
                             <section>
-                                <div class="table-responsive">
-                                    <table class="table align-middle text-nowrap mb-0">
-                                        <thead class="fs-2">
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Quantity</th>
-                                                <th class="text-end">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="border-bottom-0">
-                                                    <div class="d-flex align-items-center gap-3 overflow-hidden">
-                                                        <img src="../assets/images/products/s11.jpg" alt="matdash-img" class="img-fluid rounded" width="80">
-                                                        <div>
-                                                            <h6 class="fw-semibold fs-4 mb-0">Super Games</h6>
-                                                            <p class="mb-0">toys</p>
-                                                            <a href="javascript:void(0)" class="text-danger fs-4">
-                                                                <i class="ti ti-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="border-bottom-0">
-                                                    <div class="input-group input-group-sm flex-nowrap rounded">
-                                                        <button class="btn minus min-width-40 py-0 border-end border-muted border-end-0 text-muted" type="button" id="add1">
-                                                            <i class="ti ti-minus"></i>
-                                                        </button>
-                                                        <input type="text" class="min-width-40 flex-grow-0 border border-muted text-muted fs-3 fw-semibold form-control text-center qty" placeholder="" aria-label="Example text with button addon" aria-describedby="add1" value="1">
-                                                        <button class="btn min-width-40 py-0 border border-muted border-start-0 text-muted add" type="button" id="addo2">
-                                                            <i class="ti ti-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td class="text-end border-bottom-0">
-                                                    <h6 class="fs-4 fw-semibold mb-0">$285</h6>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="order-summary border rounded p-4 my-4">
-                                    <div class="p-3">
-                                        <h5 class="fs-5 fw-semibold mb-4">Order Summary</h5>
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-0 fs-4">Sub Total</p>
-                                            <h6 class="mb-0 fs-4 fw-semibold">$285</h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-0 fs-4">Discount 5%</p>
-                                            <h6 class="mb-0 fs-4 fw-semibold text-danger">-$14</h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-0 fs-4">Shipping</p>
-                                            <h6 class="mb-0 fs-4 fw-semibold">Free</h6>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="mb-0 fs-4 fw-semibold">Total</h6>
-                                            <h6 class="mb-0 fs-5 fw-semibold">$271</h6>
+
+                                <div class="col-md-8 col-lg-4 offset-md-2 offset-lg-4  ">
+                                    <div class="card mb-3">
+                                        <div class="card-body border">
+                                            <p class="text-center mb-1 mb-md-3  bi-medium ">Station information</p>
+                                            <p class="m-0 bi-medium">Charge point : <span class="float-end fw-bold text-primary" id='cp'> EVX#XX</span></p>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center blink">
+                                            <h3 class="text-secondary">Please select connector</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="connectors_by_cp"></div>
+                                        <!-- <div class="col-sm-12 text-center mb-2 border ">
+                                            <a href="/galvanic/Main/ConnectorStatus/THCTMEX000051?connectorId=1" class="connectorItem" data-charge-point-id="THCTMEX000051" data-connector-id="1">
+                                                <div class="card">
+                                                    <div class="card-body py-2 small" style="padding-left: 5px;padding-right: 5px;">
+                                                        <p class="mb-1">XXXX #X</p>
+                                                        <p class="mb-1">AC Type 2 (30.0 kW)</p>
+                                                        <img src="https://geonine.io/evpublic/connector/4.png" style="width: 100%; max-width: 80px;">
+                                                        <p class="m-0 mt-1 mb-2">
+                                                            Service Charge: XX THB/kWh
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div> -->
+                                        <!-- <div class="col-sm-12 text-center mb-2 border ">
+                                            <a href="/galvanic/Main/ConnectorStatus/THCTMEX000051?connectorId=1" class="connectorItem" data-charge-point-id="THCTMEX000051" data-connector-id="1">
+                                                <div class="card">
+                                                    <div class="card-body py-2 small" style="padding-left: 5px;padding-right: 5px;">
+                                                        <p class="mb-1">XXXX #X</p>
+                                                        <p class="mb-1">AC Type 2 (30.0 kW)</p>
+                                                        <img src="https://geonine.io/evpublic/connector/4.png" style="width: 100%; max-width: 80px;">
+                                                        <p class="m-0 mt-1 mb-2">
+                                                            Service Charge: XX THB/kWh
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div> -->
+                                    </div>
                                 </div>
+
+
                             </section>
                             <!-- Step 2 -->
                             <h6>2. PLUG IN CONNECTOR</h6>
                             <section>
-                                <div class="billing-address-content">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="card shadow-none border">
-                                                <div class="card-body p-4">
-                                                    <h6 class="mb-3 fs-4 fw-semibold">Johnathan Doe</h6>
-                                                    <p class="mb-1 fs-2">E601 Vrundavan Heights, godrej garden city - 382481</p>
-                                                    <h6 class="d-flex align-items-center gap-2 my-4 fw-semibold fs-4">
-                                                        <i class="ti ti-device-mobile fs-7"></i>9999501050
-                                                    </h6>
-                                                    <a href="javascript:void(0)" class="btn btn-outline-primary  billing-address">Deliver To
-                                                        this address</a>
-                                                </div>
+                                <div class="col-md-12 col-lg-8 offset-md-2 offset-lg-2">
+                                    <div class="card mb-2" id="information_station">
+                                        <div class="card-body border">
+                                            <p class="text-center mb-1 mb-md-3 small ">Station information</p>
+                                            <div id="infoDiv">
+                                                <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description"> XXXX</span></p>
+                                                <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp"> XXXXX #XX</span></p>
+                                                <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="card shadow-none border">
-                                                <div class="card-body p-4">
-                                                    <h6 class="mb-3 fs-4 fw-semibold">ParleG Doe</h6>
-                                                    <p class="mb-1 fs-2">D201 Galexy Heights, godrej garden city - 382481</p>
-                                                    <h6 class="d-flex align-items-center gap-2 my-4 fw-semibold fs-4">
-                                                        <i class="ti ti-device-mobile fs-7"></i>9999501050
-                                                    </h6>
-                                                    <a href="javascript:void(0)" class="btn btn-outline-primary  billing-address">Deliver To
-                                                        this address</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="card shadow-none border">
-                                                <div class="card-body p-4">
-                                                    <h6 class="mb-3 fs-4 fw-semibold">Guddu Bhaiya</h6>
-                                                    <p class="mb-1 fs-2">Mumbai khao gali, Behind shukan, godrej garden city - 382481</p>
-                                                    <h6 class="d-flex align-items-center gap-2 my-4 fw-semibold fs-4">
-                                                        <i class="ti ti-device-mobile fs-7"></i>9999501050
-                                                    </h6>
-                                                    <a href="javascript:void(0)" class="btn btn-outline-primary  billing-address">Deliver To
-                                                        this address</a>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="order-summary border rounded p-4 my-4">
-                                        <div class="p-3">
-                                            <h5 class="fs-5 fw-semibold mb-4">Order Summary</h5>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-0 fs-4">Sub Total</p>
-                                                <h6 class="mb-0 fs-4 fw-semibold">$285</h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-0 fs-4">Discount 5%</p>
-                                                <h6 class="mb-0 fs-4 fw-semibold text-danger">-$14</h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-0 fs-4">Shipping</p>
-                                                <h6 class="mb-0 fs-4 fw-semibold">Free</h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <h6 class="mb-0 fs-4 fw-semibold">Total</h6>
-                                                <h6 class="mb-0 fs-5 fw-semibold">$271</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="payment-method-list payment-method">
-                                    <div class="delivery-option btn-group-active  card shadow-none border">
-                                        <div class="card-body p-4">
-                                            <h6 class="mb-3 fw-semibold fs-4">Delivery Option</h6>
-                                            <div class="btn-group flex-row gap-3 w-100" role="group" aria-label="Basic radio toggle button group">
-                                                <div class="position-relative form-check btn-custom-fill flex-fill ps-0">
-                                                    <input type="radio" class="form-check-input ms-4 round-16" name="deliveryOpt1" id="btnradio1" autocomplete="off" checked>
-                                                    <label class="btn btn-outline-primary mb-0 p-3 rounded ps-5 w-100" for="btnradio1">
-                                                        <div class="text-start ps-2">
-                                                            <h6 class="fs-4 fw-semibold mb-0">Free delivery</h6>
-                                                            <p class="mb-0 text-muted">Delivered on Firday, May 10</p>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="position-relative form-check btn-custom-fill flex-fill ps-0">
-                                                    <input type="radio" class="form-check-input ms-4 round-16" name="deliveryOpt1" id="btnradio2" autocomplete="off">
-                                                    <label class="btn btn-outline-primary mb-0 p-3 rounded ps-5 w-100" for="btnradio2">
-                                                        <div class="text-start ps-2">
-                                                            <h6 class="fs-4 fw-semibold mb-0">Fast delivery ($2,00)</h6>
-                                                            <p class="mb-0 text-muted">Delivered on Wednesday, May 8</p>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="payment-option btn-group-active  card shadow-none border">
-                                        <div class="card-body p-4">
-                                            <h6 class="mb-3 fw-semibold fs-4">Payment Option</h6>
+                                    <div class="card mb-2">
+                                        <div class="card-body border">
                                             <div class="row">
-                                                <div class="col-lg-8">
-                                                    <div class="btn-group flex-column" role="group" aria-label="Basic radio toggle button group">
-                                                        <div class="position-relative mb-3 w-100 form-check btn-custom-fill ps-0">
-
-                                                            <input type="radio" class="form-check-input ms-4 round-16" name="paymentType1" id="btnradio3" autocomplete="off" checked>
-
-                                                            <label class="btn btn-outline-primary mb-0 p-3 rounded ps-5 w-100" for="btnradio3">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="text-start ps-2">
-                                                                        <h6 class="fs-4 fw-semibold mb-0">Pay with Paypal</h6>
-                                                                        <p class="mb-0 text-muted">You will be redirected to PayPal website to
-                                                                            complete your purchase securely.</p>
-                                                                    </div>
-                                                                    <img src="../assets/images/svgs/paypal.svg" alt="matdash-img" class="img-fluid ms-auto">
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="position-relative mb-3 form-check btn-custom-fill ps-0">
-                                                            <input type="radio" class="form-check-input ms-4 round-16" name="paymentType1" id="btnradio4" autocomplete="off">
-                                                            <label class="btn btn-outline-primary mb-0 p-3 rounded ps-5 w-100" for="btnradio4">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="text-start ps-2">
-                                                                        <h6 class="fs-4 fw-semibold mb-0">Credit / Debit Card</h6>
-                                                                        <p class="mb-0 text-muted">We support Mastercard, Visa, Discover and Stripe.
-                                                                        </p>
-                                                                    </div>
-                                                                    <img src="../assets/images/svgs/mastercard.svg" alt="matdash-img" class="img-fluid ms-auto">
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <div class="position-relative form-check btn-custom-fill ps-0">
-                                                            <input type="radio" class="form-check-input ms-4 round-16" name="paymentType1" id="btnradio5" autocomplete="off">
-                                                            <label class="btn btn-outline-primary mb-0 p-3 rounded ps-5 w-100" for="btnradio5">
-                                                                <div class="text-start ps-2">
-                                                                    <h6 class="fs-4 fw-semibold mb-0">Cash on Delivery</h6>
-                                                                    <p class="mb-0 text-muted">Pay with cash when your order is delivered.</p>
-                                                                </div>
-                                                            </label>
-                                                        </div>
+                                                <div class="col-3 text-end">
+                                                    <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-charging-pile">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1 3 3v3a.5 .5 0 1 0 1 0v-6.585l-1 -1l-.293 .292a1 1 0 0 1 -1.414 -1.414l.292 -.293l-.292 -.293a1 1 0 0 1 -.083 -1.32l.083 -.094a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 .293 .707v7a2.5 2.5 0 1 1 -5 0v-3a1 1 0 0 0 -1 -1v7a1 1 0 0 1 0 2h-12a1 1 0 0 1 0 -2v-13a3 3 0 0 1 3 -3zm-2.486 7.643a1 1 0 0 0 -1.371 .343l-1.5 2.5l-.054 .1a1 1 0 0 0 .911 1.414h1.233l-.59 .986a1 1 0 0 0 1.714 1.028l1.5 -2.5l.054 -.1a1 1 0 0 0 -.911 -1.414h-1.235l.592 -.986a1 1 0 0 0 -.343 -1.371m2.486 -5.643h-6a1 1 0 0 0 -1 1v1h8v-1a1 1 0 0 0 -1 -1"></path>
+                                                        </svg></span>
+                                                </div>
+                                                <div class="col-6" style="margin: auto;">
+                                                    <div id="myProgress">
+                                                        <div id="myBar"></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <img src="../assets/images/products/payment.svg" alt="matdash-img" class="img-fluid">
+                                                <div class="col-3" style="align-items: start;">
+                                                    <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-car">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M17 14a3 3 0 0 1 2.685 4.34l-.067 .126l-.1 .165l-.141 .2l-.116 .141l-.116 .126a3 3 0 0 1 -.388 .334l-.149 .1l-.089 .055q -.052 .032 -.107 .06l-.17 .085l-.175 .073l-.104 .037l-.17 .052l-.172 .042l-.183 .032l-.075 .01q -.09 .011 -.18 .016l-.183 .006l-.183 -.006l-.18 -.016l-.192 -.03l-.17 -.036l-.18 -.051l-.058 -.019a3 3 0 0 1 -.174 -.065l-.161 -.072l-.168 -.087l-.053 -.03q -.122 -.072 -.237 -.156l-.16 -.124l-.15 -.134l-.129 -.129l-.066 -.073l-.1 -.12l-.12 -.165l-.074 -.113l-.063 -.108l-.067 -.126a3 3 0 0 1 -.315 -1.34a3 3 0 0 1 3 -3m-10 0a3 3 0 0 1 2.685 4.34l-.067 .126l-.1 .165l-.141 .2l-.116 .141l-.116 .126a3 3 0 0 1 -.388 .334l-.149 .1l-.089 .055q -.052 .032 -.107 .06l-.17 .085l-.175 .073l-.104 .037l-.17 .052l-.172 .042l-.183 .032l-.075 .01q -.09 .011 -.18 .016l-.183 .006l-.183 -.006l-.18 -.016l-.192 -.03l-.17 -.036l-.18 -.051l-.058 -.019a3 3 0 0 1 -.174 -.065l-.161 -.072l-.168 -.087l-.053 -.03q -.122 -.072 -.237 -.156l-.16 -.124l-.15 -.134l-.129 -.129l-.066 -.073l-.1 -.12l-.12 -.165l-.074 -.113l-.063 -.108l-.067 -.126a3 3 0 0 1 -.315 -1.34a3 3 0 0 1 3 -3m7 -9a1 1 0 0 1 .694 .28l.087 .095l3.699 4.625h.52a3 3 0 0 1 2.995 2.824l.005 .176v4a1 1 0 0 1 -1 1h-.126q .125 -.48 .126 -1a4 4 0 1 0 -7.874 1h-2.252q .124 -.48 .126 -1a4 4 0 1 0 -7.874 1h-.126a1 1 0 0 1 -1 -1v-6l.007 -.117l.008 -.056l.017 -.078l.012 -.036l.014 -.05l2.014 -5.034a1 1 0 0 1 .928 -.629zm-7 11a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m10 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m-3.48 -9h-.52v3h2.92z"></path>
+                                                        </svg></span>
                                                 </div>
+
                                             </div>
+                                            <h3 class="text-center mt-3 text-warning blink" id="showConnectorPlugText">Please plug the connector into your car !!</h3>
                                         </div>
-                                    </div>
-                                    <div class="order-summary border rounded p-4 my-4">
-                                        <div class="p-3">
-                                            <h5 class="fs-5 fw-semibold mb-4">Order Summary</h5>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-0 fs-4">Sub Total</p>
-                                                <h6 class="mb-0 fs-4 fw-semibold">$285</h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-0 fs-4">Discount 5%</p>
-                                                <h6 class="mb-0 fs-4 fw-semibold text-danger">-$14</h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-0 fs-4">Shipping</p>
-                                                <h6 class="mb-0 fs-4 fw-semibold">Free</h6>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <h6 class="mb-0 fs-4 fw-semibold">Total</h6>
-                                                <h6 class="mb-0 fs-5 fw-semibold">$271</h6>
-                                            </div>
+                                        <div class="card-footer text-center">
+                                            <button type="button" class="btn btn-secondary btn-lg" id="startChargeBtn" style="" disabled="">Start charging</button>
+                                            <button type="button" class="btn btn-warning btn-lg" id="stopChargeBtn" style="display:none" disabled="">Stop charging</button>
                                         </div>
                                     </div>
                                 </div>
+
                             </section>
                             <!-- Step 3 -->
                             <h6>3. CHARGING</h6>
-                            <section class="payment-method text-center">
-                                <h5 class="fw-semibold fs-5">Thank you for your purchase!</h5>
-                                <h6 class="fw-semibold text-primary mb-7">Your order id: 3fa7-69e1-79b4-dbe0d35f5f5d</h6>
-                                <img src="../assets/images/products/payment-complete.svg" alt="matdash-img" class="img-fluid mb-4" width="350">
-                                <p class="mb-0 fs-2">We will send you a notification
-                                    <br>within 2 days when it ships.
-                                </p>
-                                <div class="d-sm-flex align-items-center justify-content-between my-4">
-                                    <a href="./eco-shop.html" class="btn btn-success d-block mb-2 mb-sm-0">Continue Shopping</a>
-                                    <a href="javascript:void(0)" class="btn btn-primary d-block">Download Receipt</a>
+                            <section>
+                                <div class="col-md-12 col-lg-8 offset-md-2 offset-lg-2">
+                                    <div class="card-body border mb-2">
+                                        <p class="text-center mb-1 mb-md-3 small ">Station information</p>
+                                        <div id="infoDiv">
+                                            <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description"> XXXX</span></p>
+                                            <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp"> XXXXX #XX</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body border mb-2">
+                                        <div class="row col-lg-12 col-md-12 text-center">
+                                            <div class="card-body text-center px-9 pb-4">
+                                                <div class="d-flex align-items-center justify-content-center round-48 rounded text-bg-primary flex-shrink-0 mb-3 mx-auto">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-battery-vertical-3">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M7 18v-11a2 2 0 0 1 2 -2h.5a.5 .5 0 0 0 .5 -.5a.5 .5 0 0 1 .5 -.5h3a.5 .5 0 0 1 .5 .5a.5 .5 0 0 0 .5 .5h.5a2 2 0 0 1 2 2v11a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2"></path>
+                                                        <path d="M10 17h4"></path>
+                                                        <path d="M10 14h4"></path>
+                                                        <path d="M10 11h4"></path>
+                                                    </svg>
+                                                </div>
+                                                <h6 class="fw-normal fs-3 mb-1">Total Battery</h6>
+                                                <h4 class="mb-2 d-flex align-items-center justify-content-center gap-1">20 %
+                                                </h4>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12 mb-1 text-lg-end">
+                                                <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-charging-pile">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1 3 3v3a.5 .5 0 1 0 1 0v-6.585l-1 -1l-.293 .292a1 1 0 0 1 -1.414 -1.414l.292 -.293l-.292 -.293a1 1 0 0 1 -.083 -1.32l.083 -.094a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 .293 .707v7a2.5 2.5 0 1 1 -5 0v-3a1 1 0 0 0 -1 -1v7a1 1 0 0 1 0 2h-12a1 1 0 0 1 0 -2v-13a3 3 0 0 1 3 -3zm-2.486 7.643a1 1 0 0 0 -1.371 .343l-1.5 2.5l-.054 .1a1 1 0 0 0 .911 1.414h1.233l-.59 .986a1 1 0 0 0 1.714 1.028l1.5 -2.5l.054 -.1a1 1 0 0 0 -.911 -1.414h-1.235l.592 -.986a1 1 0 0 0 -.343 -1.371m2.486 -5.643h-6a1 1 0 0 0 -1 1v1h8v-1a1 1 0 0 0 -1 -1"></path>
+                                                    </svg></span>
+                                            </div>
+                                            <div class="col-lg-4 mb-1 col-md-12" style="display: flex; justify-content: center;">
+                                                <div class="battery">
+                                                    <span class="bar"></span>
+                                                    <span class="bar"></span>
+                                                    <span class="bar"></span>
+                                                    <span class="bar"></span>
+                                                    <span class="bar"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12 text-center text-lg-start">
+                                                <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-car">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M17 14a3 3 0 0 1 2.685 4.34l-.067 .126l-.1 .165l-.141 .2l-.116 .141l-.116 .126a3 3 0 0 1 -.388 .334l-.149 .1l-.089 .055q -.052 .032 -.107 .06l-.17 .085l-.175 .073l-.104 .037l-.17 .052l-.172 .042l-.183 .032l-.075 .01q -.09 .011 -.18 .016l-.183 .006l-.183 -.006l-.18 -.016l-.192 -.03l-.17 -.036l-.18 -.051l-.058 -.019a3 3 0 0 1 -.174 -.065l-.161 -.072l-.168 -.087l-.053 -.03q -.122 -.072 -.237 -.156l-.16 -.124l-.15 -.134l-.129 -.129l-.066 -.073l-.1 -.12l-.12 -.165l-.074 -.113l-.063 -.108l-.067 -.126a3 3 0 0 1 -.315 -1.34a3 3 0 0 1 3 -3m-10 0a3 3 0 0 1 2.685 4.34l-.067 .126l-.1 .165l-.141 .2l-.116 .141l-.116 .126a3 3 0 0 1 -.388 .334l-.149 .1l-.089 .055q -.052 .032 -.107 .06l-.17 .085l-.175 .073l-.104 .037l-.17 .052l-.172 .042l-.183 .032l-.075 .01q -.09 .011 -.18 .016l-.183 .006l-.183 -.006l-.18 -.016l-.192 -.03l-.17 -.036l-.18 -.051l-.058 -.019a3 3 0 0 1 -.174 -.065l-.161 -.072l-.168 -.087l-.053 -.03q -.122 -.072 -.237 -.156l-.16 -.124l-.15 -.134l-.129 -.129l-.066 -.073l-.1 -.12l-.12 -.165l-.074 -.113l-.063 -.108l-.067 -.126a3 3 0 0 1 -.315 -1.34a3 3 0 0 1 3 -3m7 -9a1 1 0 0 1 .694 .28l.087 .095l3.699 4.625h.52a3 3 0 0 1 2.995 2.824l.005 .176v4a1 1 0 0 1 -1 1h-.126q .125 -.48 .126 -1a4 4 0 1 0 -7.874 1h-2.252q .124 -.48 .126 -1a4 4 0 1 0 -7.874 1h-.126a1 1 0 0 1 -1 -1v-6l.007 -.117l.008 -.056l.017 -.078l.012 -.036l.014 -.05l2.014 -5.034a1 1 0 0 1 .928 -.629zm-7 11a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m10 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m-3.48 -9h-.52v3h2.92z"></path>
+                                                    </svg></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card border-bottom border-info">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h4 class="fs-7">120</h4>
+                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                        </div>
+                                                        <span class="text-info display-6">
+                                                            <i class="ti ti-file-text"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card border-bottom border-info">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h4 class="fs-7">120</h4>
+                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                        </div>
+                                                        <span class="text-info display-6">
+                                                            <i class="ti ti-file-text"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card border-bottom border-info">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h4 class="fs-7">120</h4>
+                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                        </div>
+                                                        <span class="text-info display-6">
+                                                            <i class="ti ti-file-text"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="card border-bottom border-info">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h4 class="fs-7">120</h4>
+                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                        </div>
+                                                        <span class="text-info display-6">
+                                                            <i class="ti ti-file-text"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </section>
                             <!-- Step 4 -->
                             <h6>4. SUMMARY</h6>
-                            <section class="payment-method text-center">
-                                <h5 class="fw-semibold fs-5">Thank you for your purchase!</h5>
-                                <h6 class="fw-semibold text-primary mb-7">Your order id: 3fa7-69e1-79b4-dbe0d35f5f5d</h6>
-                                <img src="../assets/images/products/payment-complete.svg" alt="matdash-img" class="img-fluid mb-4" width="350">
-                                <p class="mb-0 fs-2">We will send you a notification
-                                    <br>within 2 days when it ships.
-                                </p>
-                                <div class="d-sm-flex align-items-center justify-content-between my-4">
-                                    <a href="./eco-shop.html" class="btn btn-success d-block mb-2 mb-sm-0">Continue Shopping</a>
-                                    <a href="javascript:void(0)" class="btn btn-primary d-block">Download Receipt</a>
+                            <section>
+                                <div class="col-md-12 col-lg-8 offset-md-2 offset-lg-2">
+                                    <div class="card-body border mb-2">
+                                        <p class="text-center mb-1 mb-md-3 small ">Station information</p>
+                                        <div id="infoDiv">
+                                            <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description"> XXXX</span></p>
+                                            <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp"> XXXXX #XX</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body mb-2">
+                                        <p class="text-center mb-1 mb-md-3 small ">Charging information</p>
+                                        <div id="infoDiv">
+                                            <p class="m-0 small">Date : <span class="float-end text-primary fw-bold" id="ev_description"> date time</span></p>
+                                            <p class="m-0 small">Period : <span class="float-end text-primary fw-bold" id="ev_cp"> XXX Minute</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Unit : <span class="float-end text-primary fw-bold"> XXX kWh</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer mb-2">
+                                        <div id="infoDiv">
+                                            <p class="m-0 small mt-1 mb-1">Total Price : <span class="float-end text-primary fw-bold"> XXX THB</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2">
+                                        <div class="card-body border">
+                                            <div class="row">
+                                                <div class="col-3 text-end">
+                                                    <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-charging-pile">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M12 3a3 3 0 0 1 3 3v4a3 3 0 0 1 3 3v3a.5 .5 0 1 0 1 0v-6.585l-1 -1l-.293 .292a1 1 0 0 1 -1.414 -1.414l.292 -.293l-.292 -.293a1 1 0 0 1 -.083 -1.32l.083 -.094a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 .293 .707v7a2.5 2.5 0 1 1 -5 0v-3a1 1 0 0 0 -1 -1v7a1 1 0 0 1 0 2h-12a1 1 0 0 1 0 -2v-13a3 3 0 0 1 3 -3zm-2.486 7.643a1 1 0 0 0 -1.371 .343l-1.5 2.5l-.054 .1a1 1 0 0 0 .911 1.414h1.233l-.59 .986a1 1 0 0 0 1.714 1.028l1.5 -2.5l.054 -.1a1 1 0 0 0 -.911 -1.414h-1.235l.592 -.986a1 1 0 0 0 -.343 -1.371m2.486 -5.643h-6a1 1 0 0 0 -1 1v1h8v-1a1 1 0 0 0 -1 -1"></path>
+                                                        </svg></span>
+                                                </div>
+                                                <div class="col-6" style="margin: auto;">
+                                                    <div id="myProgress">
+                                                        <div id="myBarMax"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3" style="align-items: start;">
+                                                    <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-car">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M17 14a3 3 0 0 1 2.685 4.34l-.067 .126l-.1 .165l-.141 .2l-.116 .141l-.116 .126a3 3 0 0 1 -.388 .334l-.149 .1l-.089 .055q -.052 .032 -.107 .06l-.17 .085l-.175 .073l-.104 .037l-.17 .052l-.172 .042l-.183 .032l-.075 .01q -.09 .011 -.18 .016l-.183 .006l-.183 -.006l-.18 -.016l-.192 -.03l-.17 -.036l-.18 -.051l-.058 -.019a3 3 0 0 1 -.174 -.065l-.161 -.072l-.168 -.087l-.053 -.03q -.122 -.072 -.237 -.156l-.16 -.124l-.15 -.134l-.129 -.129l-.066 -.073l-.1 -.12l-.12 -.165l-.074 -.113l-.063 -.108l-.067 -.126a3 3 0 0 1 -.315 -1.34a3 3 0 0 1 3 -3m-10 0a3 3 0 0 1 2.685 4.34l-.067 .126l-.1 .165l-.141 .2l-.116 .141l-.116 .126a3 3 0 0 1 -.388 .334l-.149 .1l-.089 .055q -.052 .032 -.107 .06l-.17 .085l-.175 .073l-.104 .037l-.17 .052l-.172 .042l-.183 .032l-.075 .01q -.09 .011 -.18 .016l-.183 .006l-.183 -.006l-.18 -.016l-.192 -.03l-.17 -.036l-.18 -.051l-.058 -.019a3 3 0 0 1 -.174 -.065l-.161 -.072l-.168 -.087l-.053 -.03q -.122 -.072 -.237 -.156l-.16 -.124l-.15 -.134l-.129 -.129l-.066 -.073l-.1 -.12l-.12 -.165l-.074 -.113l-.063 -.108l-.067 -.126a3 3 0 0 1 -.315 -1.34a3 3 0 0 1 3 -3m7 -9a1 1 0 0 1 .694 .28l.087 .095l3.699 4.625h.52a3 3 0 0 1 2.995 2.824l.005 .176v4a1 1 0 0 1 -1 1h-.126q .125 -.48 .126 -1a4 4 0 1 0 -7.874 1h-2.252q .124 -.48 .126 -1a4 4 0 1 0 -7.874 1h-.126a1 1 0 0 1 -1 -1v-6l.007 -.117l.008 -.056l.017 -.078l.012 -.036l.014 -.05l2.014 -5.034a1 1 0 0 1 .928 -.629zm-7 11a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m10 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m-3.48 -9h-.52v3h2.92z"></path>
+                                                        </svg></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </section>
                         </form>

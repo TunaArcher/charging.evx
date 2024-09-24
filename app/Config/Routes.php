@@ -64,6 +64,9 @@ $routes->group('booking', ['filter' => 'userAuth'], function ($routes) {
 // Charging
 $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->get('index', 'Charging::index');
+    $routes->post('GetStation', 'Charging::getEVStation');
+    $routes->post('getConnecter', 'Charging::getEVStationConnector');  
+    $routes->post('getStatusConnecter', 'Charging::getEVStationConnectorStatus');
 });
 
 // Profile

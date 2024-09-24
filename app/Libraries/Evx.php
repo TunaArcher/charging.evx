@@ -505,6 +505,95 @@ class Evx
         }
     }
 
+    public function getChargePointSteve($evx)
+    {
+
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getEVStation';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'charge_box_id' => $evx['charge_box_id']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getChargePointByStatus error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getConnectorSteve($evx)
+    {
+
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getConnecter';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'charge_box_id' => $evx['charge_box_id'],
+
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getConnectorStatusSteve($evx)
+    {
+
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getConnecterStatus';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'ev_chargepoint_name' => $evx['charge_box_id'],
+                    'connector_pk' =>  $evx['connector_pk'],
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
     public function getChargePointByStatus($status)
     {
         try {
@@ -515,7 +604,7 @@ class Evx
                     'Authorization' => "Bearer " . $this->accessToken
                 ],
                 'json' => [
-                    'status' => $status
+                    'status' => $status,
                 ]
             ]);
 
@@ -735,5 +824,5 @@ class Evx
      * 8. Report | รายงาน & ประวัติ
      */
 
-     // TODO:: HANDLE
+    // TODO:: HANDLE
 }
