@@ -67,6 +67,7 @@ $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->post('GetStation', 'Charging::getEVStation');
     $routes->post('getConnecter', 'Charging::getEVStationConnector');  
     $routes->post('getStatusConnecter', 'Charging::getEVStationConnectorStatus');
+    $routes->post('startCharger', 'Charging::startCharger');
 });
 
 // Profile

@@ -19,9 +19,7 @@ class Charging extends BaseController
         | SET UTILITIES
         | -------------------------------------------------------------------------
         */
-
         // Model
-
     }
 
     public function index()

@@ -37,10 +37,9 @@ var stepsFormGoNext = $(".tab-charger").steps({
   onStepChanged: function (event, current, next) {
     if (current > 1) {
       $(".actions > ul > li:first-child").attr("style", "");
-      
     } else if (current > 2 && current < 3) {
-         $(".actions > ul > li:nth-child(2)").attr("style", "");
-    }else {
+      $(".actions > ul > li:nth-child(2)").attr("style", "");
+    } else {
       $(".actions > ul > li:first-child").attr("style", "display:none");
       // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
     }
@@ -55,6 +54,8 @@ var stepsFormGoNext = $(".tab-charger").steps({
 
 var ev_chargepoint_name;
 var ev_connector_id;
+var obj_status;
+var callStatusCharge;
 
 $("#click-scan").click(function () {
   document.getElementById("scan_station").style.display = "none";
@@ -107,6 +108,50 @@ function searchStation(eve) {
   }
 }
 
+function searchStationScan(eve) {
+  let evxstation = eve;
+
+  let dataObj = {
+    evxstation,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/GetStation`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(dataObj),
+    success: function (res) {
+      if (res.success === 1) {
+        html5QrcodeScanner.clear();
+        document.getElementById("scan_station").style.display = "none";
+        document.getElementById("scan_page").style.display = "none";
+        document.getElementById("step_station").style.display = "block";
+
+        $("#cp").html(
+          "<span class='float-end fw-bold text-primary' >" +
+            res.data.charge_box_id +
+            "</span></p>"
+        );
+
+        setInterval(function () {
+          $(".blink").fadeToggle();
+        }, 100);
+
+        getConnectByChargePoint(res.data.charge_box_id);
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ไม่พบหัวชาร์จ`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {},
+  });
+}
+
 function getConnectByChargePoint(ev_cp) {
   let dataObj = {
     ev_cp,
@@ -150,8 +195,6 @@ function getConnectByChargePoint(ev_cp) {
             "</div>";
         }
 
-       
-
         $(".connectors_by_cp").html(html_box_connector);
       } else {
       }
@@ -163,16 +206,21 @@ function getConnectByChargePoint(ev_cp) {
 }
 
 function onScanSuccess(decodedText, decodedResult) {
-  // Handle on success condition with the decoded text or result.
-  console.log(`Scan result: ${decodedText}`, decodedResult);
-  document.getElementById("scan_station").style.display = "none";
-  document.getElementById("scan_page").style.display = "none";
-  document.getElementById("step_station").style.display = "block";
-  html5QrcodeScanner.clear();
+  // console.log(`Scan result: ${decodedText}`, decodedResult);
+  searchStationScan(decodedText);
+  // document.getElementById("scan_station").style.display = "none";
+  // document.getElementById("scan_page").style.display = "none";
+  // document.getElementById("step_station").style.display = "block";
+  // html5QrcodeScanner.clear();
 }
 
 function clickSelectConnector(connector_pk) {
   let dataObj = {
+    connector_pk,
+    ev_chargepoint_name,
+  };
+
+  obj_status = {
     connector_pk,
     ev_chargepoint_name,
   };
@@ -185,10 +233,14 @@ function clickSelectConnector(connector_pk) {
     data: JSON.stringify(dataObj),
     success: function (res) {
       if (res.success === 1) {
-        if (res.data.status != "Preparing" && res.data.status != "Charging") {
+        if (
+          res.data.status != "Preparing" &&
+          res.data.status != "Charging" &&
+          res.data.status != "Unavailable"
+        ) {
           $("#ev_description").html(
             '<span class="float-end text-primary fw-bold" id="">' +
-            res.data.description +
+              res.data.description +
               "</span></p>"
           );
           $("#ev_cp").html(
@@ -199,7 +251,16 @@ function clickSelectConnector(connector_pk) {
               "</span></p>"
           );
           stepsFormGoNext.steps("next");
+          getStartConnect();
           setInterval(move, 1000);
+          callStatusCharge = setInterval(getStartConnect, 1000);
+        } else {
+          Swal.fire({
+            icon: "warning",
+            text: `หัวชาร์จไม่พร้อมใช้งาน`,
+            timer: "2000",
+            heightAuto: false,
+          });
         }
       } else {
         Swal.fire({
@@ -215,4 +276,80 @@ function clickSelectConnector(connector_pk) {
     },
   });
   // stepsFormGoNext.steps("next");
+}
+
+function getStartConnect() {
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getStatusConnecter`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status),
+    success: function (res) {
+      if (res.success === 1) {
+        if (res.data.status == "Finishing" || res.data.status == "Preparing") {
+          $("#startChargeBtn").prop("disabled", false);
+          clearInterval(callStatusCharge);
+        } else {
+          $("#startChargeBtn").prop("disabled", true);
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `${res.message}`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+$("#startChargeBtn").click(function () {
+  
+  let username = 'admin', password = '1234';
+  let dataObj = {
+    username,
+    password,
+  };
+  $.ajax({
+    url: `${serverUrl}/charging/startCharger`,
+    type: "POST",
+    data: JSON.stringify(dataObj),
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    success: function (response) {
+      console.log(response);
+      // remoteStartSteve();
+    },
+    error: function () {
+      // alert("error");
+    },
+  });
+
+  // $("#startChargeBtn").hide();
+  // $("#stopChargeBtn").show();
+});
+
+function remoteStartSteve() {
+  $.ajax({
+    url: "http://209.97.162.177:8180/steve/manager/operations/v1.6/RemoteStartTransaction",
+    type: "POST",
+    data: jQuery.param({
+      chargePointSelectList: "JSON;EVX01;-",
+      connectorId: "1",
+      idTag: "EVX01_1",
+    }),
+    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+    success: function (response) {
+      // alert(response.status);
+      console.log(response);
+    },
+    error: function () {
+      // alert("error");
+    },
+  });
 }

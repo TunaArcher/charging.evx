@@ -103,7 +103,7 @@
                     </div>
                     <div class="sidebarmenu">
                         <div class="brand-logo d-flex align-items-center nav-logo">
-                            <a href="<?php echo base_url(); ?>" class="text-nowrap logo-img">
+                            <a href="<?php echo base_url('/charging/index'); ?>" class="text-nowrap logo-img">
                                 <img src="<?php echo base_url('/assets/images/logos/logo.png'); ?>" alt="Logo" />
                             </a>
                         </div>

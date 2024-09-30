@@ -128,7 +128,7 @@
                                         </div>
                                         <div class="card-footer text-center">
                                             <button type="button" class="btn btn-secondary btn-lg" id="startChargeBtn" style="" disabled="">Start charging</button>
-                                            <button type="button" class="btn btn-warning btn-lg" id="stopChargeBtn" style="display:none" disabled="">Stop charging</button>
+                                            <button type="button" class="btn btn-warning btn-lg" id="stopChargeBtn" style="display:none">Stop charging</button>
                                         </div>
                                     </div>
                                 </div>
