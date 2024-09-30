@@ -30,6 +30,11 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+$routes->get('/test', 'Test::index', ['filter' => 'userNoAuth']);
+$routes->get('/remoteStart', 'Test::remoteStart', ['filter' => 'userNoAuth']);
+// $routes->get('/remoteStatus', 'Test::remoteStatus', ['filter' => 'userNoAuth']);
+$routes->get('/remoteStop', 'Test::remoteStop', ['filter' => 'userNoAuth']);
+
 $routes->get('/', 'Home::index', ['filter' => 'userNoAuth']);
 $routes->match(['get', 'post'], 'register', 'Home::register', ['filter' => 'userNoAuth']);
 
