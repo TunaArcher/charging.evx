@@ -15,7 +15,7 @@ class Test extends BaseController
 
         $ocpp = new Ocpp();
         $ocpp->login()->remoteStart();
-        $ocpp->login()->remoteStatus();
+        // $ocpp->login()->remoteStatus();
         $ocpp->login()->remoteStop();
 
         exit();

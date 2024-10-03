@@ -564,6 +564,35 @@ class Evx
         }
     }
 
+    public function getStartTransectionLast($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getStartTransectionLast';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'connector_pk' => $evx['connector_pk'],
+                    'id_tag' => $evx['id_tag'],
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
     public function getConnectorStatusSteve($evx)
     {
 

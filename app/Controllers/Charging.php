@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\Evx;
+use App\Libraries\Ocpp;
 
 class Charging extends BaseController
 {
@@ -19,9 +20,7 @@ class Charging extends BaseController
         | SET UTILITIES
         | -------------------------------------------------------------------------
         */
-
         // Model
-
     }
 
     public function index()
@@ -192,5 +191,85 @@ class Charging extends BaseController
         } catch (\Exception $e) {
             echo $e->getMessage() . ' ' . $e->getLine();
         }
+    }
+
+    public function getTransectionStartLast()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
+
+            $requestPayload = $this->request->getJSON();
+            $connector_pk = $requestPayload->connector_pk_pub ?? null;
+            $id_tag = $requestPayload->idTag ?? null;
+
+
+            if (!$connector_pk || !$id_tag) throw new \Exception('กรุณาตรวจสอบ CP ID');
+
+            $data_station = $this->evxApi->getStartTransectionLast(
+                [
+                    'connector_pk' => $connector_pk,
+                    'id_tag' => $id_tag,
+                ]
+            );
+
+            if ($data_station) {
+
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+
+                $response['data'] = $data_station;
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+
+    public function remoteStart()
+    {
+
+        $requestPayload = $this->request->getJSON();
+        $chargePointSelectList = $requestPayload->chargePointSelectList ?? null;
+        $connectorId = $requestPayload->connectorId ?? null;
+        $idTag = $requestPayload->idTag ?? null;
+
+        $ocpp = new Ocpp();
+        $response = $ocpp->login()->remoteStart(
+            [
+                'chargePointSelectList' => $chargePointSelectList,
+                'connectorId' => $connectorId,
+                'idTag' => $idTag
+            ]
+        );
+        return $response;
+    }
+
+    public function remoteStop()
+    {
+        $requestPayload = $this->request->getJSON();
+        $chargePointSelectList = $requestPayload->chargePointSelectList ?? null;
+        $transactionId = $requestPayload->transactionId ?? null;
+
+        $ocpp = new Ocpp();
+        $response = $ocpp->login()->remoteStop(
+            [
+                'chargePointSelectList' => $chargePointSelectList,
+                'transactionId' => $transactionId,
+            ]
+        );
+        return $response;
     }
 }
