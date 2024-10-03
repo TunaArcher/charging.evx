@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 text-center blink">
+                                        <div class="col-md-12 text-center blinkConnect">
                                             <h3 class="text-secondary">Please select connector</h3>
                                         </div>
                                     </div>
@@ -125,6 +125,7 @@
 
                                             </div>
                                             <h3 class="text-center mt-3 text-warning blink" id="showConnectorPlugText">Please plug the connector into your car !!</h3>
+                                            <h3 class="text-center mt-3  text-success blinkStart" id="showConnectorPlugTextStart"  style="display: none;">Your car is charge !!</h3>
                                         </div>
                                         <div class="card-footer text-center">
                                             <button type="button" class="btn btn-secondary btn-lg" id="startChargeBtn" style="" disabled="">Start charging</button>
@@ -141,8 +142,8 @@
                                     <div class="card-body border mb-2">
                                         <p class="text-center mb-1 mb-md-3 small ">Station information</p>
                                         <div id="infoDiv">
-                                            <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description"> XXXX</span></p>
-                                            <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp"> XXXXX #XX</span></p>
+                                            <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description_charge"> XXXX</span></p>
+                                            <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp_charge"> XXXXX #XX</span></p>
                                             <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
                                             <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
                                         </div>
@@ -258,8 +259,8 @@
                                     <div class="card-body border mb-2">
                                         <p class="text-center mb-1 mb-md-3 small ">Station information</p>
                                         <div id="infoDiv">
-                                            <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description"> XXXX</span></p>
-                                            <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp"> XXXXX #XX</span></p>
+                                            <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description_sum"> XXXX</span></p>
+                                            <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp_sum"> XXXXX #XX</span></p>
                                             <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
                                             <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
                                         </div>

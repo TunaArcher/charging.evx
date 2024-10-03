@@ -80,22 +80,48 @@ class Ocpp
     {
         try {
 
+            $endPoint = 'http://209.97.162.177:8180/steve/manager/home';
+
+            $response = $this->http->request('GET', $endPoint);
+
+            $html = $response->getBody()->getContents();
+
+
+            if (strpos($html, "SIGN OUT") !== false) {
+              
+                return true;
+            } else {
+               
+                return false;
+            }
+
             // Handle ยิงไปสักหน้านึงเพื่อเช็คว่าอยู่ในระบบไหม
             // เช่นหน้า Dashboard
-            
-            return false;
-             // return true;
+
+            // return false;
+
 
         } catch (\Exception $e) {
             return false;
         }
     }
 
-    public function remoteStart()
+    public function remoteStart($evx)
     {
         try {
 
-           echo 'remoteStart !!';
+            $endPoint = 'http://209.97.162.177:8180/steve/manager/operations/v1.6/RemoteStartTransaction';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'query' => [
+                    'chargePointSelectList' => $evx['chargePointSelectList'],
+                    'connectorId' => $evx['connectorId'],
+                    'idTag' => $evx['idTag']
+                ],
+                // 'allow_redirects' => false
+            ]);
+
+            return $response->getBody()->getContents();
 
         } catch (\Exception $e) {
 
@@ -105,12 +131,21 @@ class Ocpp
         }
     }
 
-    public function remoteStop()
+    public function remoteStop($evx)
     {
         try {
 
-           echo 'remoteStop !!';
-           
+            $endPoint = 'http://209.97.162.177:8180/steve/manager/operations/v1.6/RemoteStopTransaction';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'query' => [
+                    'chargePointSelectList' => $evx['chargePointSelectList'],
+                    'transactionId' => $evx['transactionId']
+                ],
+                // 'allow_redirects' => false
+            ]);
+
+           return $response->getBody()->getContents();
         } catch (\Exception $e) {
 
             log_message('error', 'Ocpp::remoteStop error {message}', ['message' => 'message:' . $e->getMessage()]);

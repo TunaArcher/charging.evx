@@ -72,7 +72,9 @@ $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->post('GetStation', 'Charging::getEVStation');
     $routes->post('getConnecter', 'Charging::getEVStationConnector');  
     $routes->post('getStatusConnecter', 'Charging::getEVStationConnectorStatus');
-    $routes->post('startCharger', 'Charging::startCharger');
+    $routes->post('getTransectionStartLast', 'Charging::getTransectionStartLast');
+    $routes->post('startCharger', 'Charging::remoteStart');  
+    $routes->post('stopCharger', 'Charging::remoteStop'); 
 });
 
 // Profile
