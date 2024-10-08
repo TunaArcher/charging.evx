@@ -97,7 +97,7 @@
                                             <div id="infoDiv">
                                                 <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description"> XXXX</span></p>
                                                 <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp"> XXXXX #XX</span></p>
-                                                <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
+                                                <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (11.0 kW)</span></p>
                                             </div>
 
                                         </div>
@@ -144,7 +144,7 @@
                                         <div id="infoDiv">
                                             <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description_charge"> XXXX</span></p>
                                             <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp_charge"> XXXXX #XX</span></p>
-                                            <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (11.0 kW)</span></p>
                                             <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
                                         <div id="infoDiv">
                                             <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description_sum"> XXXX</span></p>
                                             <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp_sum"> XXXXX #XX</span></p>
-                                            <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (22.0 kW)</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (11.0 kW)</span></p>
                                             <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
                                         </div>
                                     </div>

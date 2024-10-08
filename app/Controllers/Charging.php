@@ -272,4 +272,60 @@ class Charging extends BaseController
         );
         return $response;
     }
+
+    public function transection_state()
+    {
+
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            $requestPayload = $this->request->getJSON();
+            $type = $requestPayload->type ?? null;
+            $user_id = $requestPayload->userId ?? null;
+            $credit = $requestPayload->credit ?? null;
+            $transectionstate = $requestPayload->transectionstate ?? null;
+            $cp_id = $requestPayload->ev_chargepoint_name ?? null;
+            $connecter_id = $requestPayload->connectorId ?? null;
+            $id_tag = $requestPayload->idTag ?? null;
+            $transection_pk = $requestPayload->transactionId ?? null;
+            $connecter_pk = $requestPayload->connector_pk_pub ?? null;
+
+            $response = $this->evxApi->transection_state(
+                [
+                    "type" => $type,
+                    "user_id" => $user_id,
+                    "credit" => $credit,
+                    "transectionstate" => $transectionstate,
+                    "cp_id" => $cp_id,
+                    "connecter_id" => $connecter_id,
+                    "id_tag" => $id_tag,
+                    "transection_pk" => $transection_pk,
+                    "connecter_pk" => $connecter_pk
+                ]
+            );
+
+
+            if ($response) {
+
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+
+                $response['data'] = [];
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
 }

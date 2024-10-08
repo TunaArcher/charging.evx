@@ -75,6 +75,7 @@ $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->post('getTransectionStartLast', 'Charging::getTransectionStartLast');
     $routes->post('startCharger', 'Charging::remoteStart');  
     $routes->post('stopCharger', 'Charging::remoteStop'); 
+    $routes->post('addTransection', 'Charging::transection_state'); 
 });
 
 // Profile
