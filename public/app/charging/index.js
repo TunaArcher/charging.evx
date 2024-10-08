@@ -206,7 +206,7 @@ function getConnectByChargePoint(ev_cp) {
             "</p>" +
             '<p class="mb-1">AC Type ' +
             res.data[index].connector_id +
-            "  (30.0 kW)</p>" +
+            "   (11.0 kW)</p>" +
             '<img src="https://geonine.io/evpublic/connector/4.png" style="width: 100%; max-width: 80px;">' +
             '<p class="m-0">' +
             "Service Charge: XX THB/kWh" +
@@ -430,6 +430,35 @@ function afterRemoteStart() {
             $(".blinkStart").fadeToggle();
           }, 100);
 
+          let dataObj = {
+            connector_pk_pub,
+            idTag,
+          };
+
+          $.ajax({
+            type: "POST",
+            url: `${serverUrl}/charging/getTransectionStartLast`,
+            contentType: "application/json; charset=utf-8;",
+            processData: false,
+            data: JSON.stringify(dataObj),
+            success: function (res) {
+              if (res.success === 1) {
+                transactionId = res.data.transaction_pk;
+                let state = "START";
+                transection_state(state);
+              } else {
+                Swal.fire({
+                  icon: "warning",
+                  text: `${res.message}`,
+                  timer: "2000",
+                  heightAuto: false,
+                });
+              }
+            },
+            error: function (res) {
+              console.log(res);
+            },
+          });
         } else {
           $("#startChargeBtn").prop("disabled", false);
           $("#startChargeBtn").show();
@@ -457,11 +486,6 @@ function afterRemoteStart() {
 }
 
 $("#stopChargeBtn").click(function () {
-  let dataObj = {
-    connector_pk_pub,
-    idTag,
-  };
-
   swal.fire({
     title: "",
     text: "Loading...",
@@ -477,28 +501,7 @@ $("#stopChargeBtn").click(function () {
     //icon: "success"
   });
 
-  $.ajax({
-    type: "POST",
-    url: `${serverUrl}/charging/getTransectionStartLast`,
-    contentType: "application/json; charset=utf-8;",
-    processData: false,
-    data: JSON.stringify(dataObj),
-    success: function (res) {
-      if (res.success === 1) {
-        beforeRemoteStop(res.data.transaction_pk);
-      } else {
-        Swal.fire({
-          icon: "warning",
-          text: `${res.message}`,
-          timer: "2000",
-          heightAuto: false,
-        });
-      }
-    },
-    error: function (res) {
-      console.log(res);
-    },
-  });
+  beforeRemoteStop(transactionId);
 });
 
 function beforeRemoteStop(id_transection_pk) {
@@ -521,6 +524,8 @@ function beforeRemoteStop(id_transection_pk) {
         if (response) {
           wait(15000);
           afterRemoteStop();
+          let state = "STOP";
+          transection_state(state);
         }
       }
     },
@@ -544,7 +549,6 @@ function afterRemoteStop() {
           $("#startChargeBtn").show();
           $("#stopChargeBtn").hide();
 
-
           clearInterval(blinkStart);
           $(".blinkStart").stop(true, true).fadeToggle(0);
           $(".blinkStart").hide();
@@ -552,7 +556,6 @@ function afterRemoteStop() {
           blink = setInterval(function () {
             $(".blink").fadeToggle();
           }, 100);
-
         } else {
           $("#startChargeBtn").prop("disabled", true);
           $("#stopChargeBtn").show();
@@ -568,6 +571,46 @@ function afterRemoteStop() {
         Swal.fire({
           icon: "warning",
           text: ``,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function transection_state(state) {
+  let transectionstate = state;
+  let credit = 0.0;
+  let type = null;
+
+  let obj_status = {
+    type,
+    userId,
+    credit,
+    transectionstate,
+    ev_chargepoint_name,
+    connectorId,
+    idTag,
+    transactionId,
+    connector_pk_pub,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/addTransection`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status),
+    success: function (res) {
+      if (res.success === 1) {
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ERROR`,
           timer: "2000",
           heightAuto: false,
         });

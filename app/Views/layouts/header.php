@@ -25,7 +25,8 @@
         }
     </style>
     <script>
-        var serverUrl = '<?php echo base_url(); ?>'
+        var serverUrl = '<?php echo base_url(); ?>';
+        var userId = '<?php echo session()->get('userID'); ?> ';
     </script>
 </head>
 
