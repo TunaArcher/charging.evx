@@ -1,6 +1,9 @@
 var html5QrcodeScanner;
+var stepsFormGoNext;
 
-(function ($) {});
+$(document).ready(function () {
+  loadTransectionStatus();
+});
 
 var i = 0;
 function move() {
@@ -29,8 +32,27 @@ function wait(ms) {
   }
 }
 
+var totalSeconds = 0;
+var dateDiffMinPub = 0;
+var dateDiffHoursPub = 0;
+var price_Kw = 10;
+var monetary_unit = "THB";
+var blink;
+var blinkStart;
+var getActive;
+var timer_count_start_charge;
+var checkFinishStatus;
+var ev_chargepoint_name;
+var connectorId;
+var obj_status;
+var callStatusCharge;
+var chargePointSelectList;
+var idTag;
+var connector_pk_pub;
+var transactionId;
+
 //Custom design form example
-var stepsFormGoNext = $(".tab-charger").steps({
+stepsFormGoNext = $(".tab-charger").steps({
   headerTag: "h6",
   bodyTag: "section",
   transitionEffect: "fade",
@@ -43,33 +65,18 @@ var stepsFormGoNext = $(".tab-charger").steps({
     $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
   },
   onStepChanged: function (event, current, next) {
-    if (current > 1) {
+    if (current > 1 && current <  3) {
       $(".actions > ul > li:first-child").attr("style", "");
-    } else if (current > 2 && current < 3) {
-      $(".actions > ul > li:nth-child(2)").attr("style", "");
-    } else {
+      // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
+    }else {
       $(".actions > ul > li:first-child").attr("style", "display:none");
       // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
     }
   },
   onFinished: function (event, currentIndex) {
-    swal(
-      "Form Submitted!",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed."
-    );
+      
   },
 });
-
-var blink;
-var blinkStart;
-var ev_chargepoint_name;
-var connectorId;
-var obj_status;
-var callStatusCharge;
-var chargePointSelectList;
-var idTag;
-var connector_pk_pub;
-var transactionId;
 
 $("#click-scan").click(function () {
   document.getElementById("scan_station").style.display = "none";
@@ -111,10 +118,6 @@ function searchStation(eve) {
 
           setInterval(function () {
             $(".blinkConnect").fadeToggle();
-          }, 100);
-
-          blink = setInterval(function () {
-            $(".blink").fadeToggle();
           }, 100);
 
           getConnectByChargePoint(res.data.charge_box_id);
@@ -300,6 +303,28 @@ function clickSelectConnector(connector_pk) {
               "</span></p>"
           );
 
+          $("#ev_service_price_sum").html(
+            '<span class="float-end text-primary fw-bold" id="">' +
+              price_Kw +
+              " " +
+              monetary_unit + "/h"+
+              "</span></p>"
+          );
+
+          $("#ev_service_price_chaging").html(
+            '<span class="float-end text-primary fw-bold" id="">' +
+              price_Kw +
+              " " +
+              monetary_unit + "/h"+
+              "</span></p>"
+          );
+
+          
+
+          blink = setInterval(function () {
+            $(".blink").fadeToggle();
+          }, 100);
+
           connectorId = res.data.connector_id;
           stepsFormGoNext.steps("next");
           getStartConnect();
@@ -338,7 +363,11 @@ function getStartConnect() {
     data: JSON.stringify(obj_status),
     success: function (res) {
       if (res.success === 1) {
-        if (res.data.status == "Finishing" || res.data.status == "Preparing") {
+        if (
+          res.data.status == "Finishing" ||
+          res.data.status == "Preparing"
+          // || res.data.status == "Available"
+        ) {
           $("#startChargeBtn").prop("disabled", false);
           clearInterval(callStatusCharge);
         } else {
@@ -416,7 +445,7 @@ function afterRemoteStart() {
     data: JSON.stringify(obj_status),
     success: function (res) {
       if (res.success === 1) {
-        if (res.data.status == "Charging") {
+        if (res.data.status == "Charging" || res.data.status == "SuspendedEV") {
           $("#startChargeBtn").prop("disabled", true);
           $("#startChargeBtn").hide();
           $("#stopChargeBtn").show();
@@ -429,6 +458,10 @@ function afterRemoteStart() {
           blinkStart = setInterval(function () {
             $(".blinkStart").fadeToggle();
           }, 100);
+
+          checkFinishStatus = setInterval(function () {
+            checkFinish();
+          }, 600000);
 
           let dataObj = {
             connector_pk_pub,
@@ -446,6 +479,15 @@ function afterRemoteStart() {
                 transactionId = res.data.transaction_pk;
                 let state = "START";
                 transection_state(state);
+
+                getActiveChargeData(transactionId);
+                //  เรียกทุกๆ 4 นาที
+                getActive = setInterval(function () {
+                  getActiveChargeData(transactionId);
+                }, 180000);
+
+                timer_count_start_charge = setInterval(setTime, 1000);
+                stepsFormGoNext.steps("next");
               } else {
                 Swal.fire({
                   icon: "warning",
@@ -495,7 +537,7 @@ $("#stopChargeBtn").click(function () {
     didClose: () => {
       Swal.hideLoading();
     },
-    timer: 15000,
+    timer: 17000,
     showConfirmButton: false,
     showCancelButton: false,
     //icon: "success"
@@ -522,7 +564,7 @@ function beforeRemoteStop(id_transection_pk) {
     success: function (response) {
       if (response) {
         if (response) {
-          wait(15000);
+          wait(16000);
           afterRemoteStop();
           let state = "STOP";
           transection_state(state);
@@ -550,12 +592,17 @@ function afterRemoteStop() {
           $("#stopChargeBtn").hide();
 
           clearInterval(blinkStart);
+          clearInterval(getActive);
+          clearInterval(timer_count_start_charge);
           $(".blinkStart").stop(true, true).fadeToggle(0);
           $(".blinkStart").hide();
 
           blink = setInterval(function () {
             $(".blink").fadeToggle();
           }, 100);
+
+          clearInterval(checkFinishStatus);
+          summaryCharger(transactionId);
         } else {
           $("#startChargeBtn").prop("disabled", true);
           $("#stopChargeBtn").show();
@@ -611,6 +658,387 @@ function transection_state(state) {
         Swal.fire({
           icon: "warning",
           text: `ERROR`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function getActiveChargeData(transaction_pk) {
+  transactionId = transaction_pk;
+  let obj_status = {
+    transaction_pk: transactionId,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getActiveChecgerData`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status),
+    success: function (res) {
+      if (res.success === 1) {
+        for (index_ = 0; index_ < res.data.length; index_++) {
+          let dataPowerActive;
+          let dataEnergyActive;
+          if (res.data[index_].measurand == "Power.Active.Import") {
+            dataPowerActive = res.data[index_].value;
+            if (dataPowerActive == null) {
+              dataPowerActive = 0;
+            }
+            $("#powerActive_id").html(
+              '<h4 class="fs-7" id="powerActive_id">' +
+                dataPowerActive +
+                "</h4>"
+            );
+          } else {
+            dataEnergyActive = parseInt(res.data[index_].value) / 1000;
+            if (dataEnergyActive == null) {
+              dataEnergyActive = 0;
+            }
+            $("#energyActive_id").html(
+              '<h4 class="fs-7" id="energyActive_id">' +
+                dataEnergyActive +
+                "</h4>"
+            );
+
+            $("#ev_sumUnit").html(
+              '<span class="float-end text-primary fw-bold" id="energyActive_id">' +
+                dataEnergyActive +
+                " kWh" +
+                "</span>"
+            );
+
+            $("#serviceActive_id").html(
+              '<h4 class="fs-7" id="serviceActive_id">'+  dataEnergyActive *  price_Kw + '</h4>' 
+            );
+    
+            $("#serviceActive_monetary_unit_id").html(
+              '<h6 class="fw-medium text-info mb-0" id="serviceActive_monetary_unit_id">Service' + price_Kw + '/kWh</h6>' 
+            );
+          }
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ERROR`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+var minutesLabel = document.getElementById("minutes");
+var hoursLabel = document.getElementById("hours");
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
+
+function setTime() {
+  ++totalSeconds;
+  // secondsLabel.innerHTML = pad(totalSeconds % 60);
+  if (totalSeconds % 60 === 0) {
+    dateDiffMinPub = parseInt(dateDiffMinPub) + 1;
+    minutesLabel.innerHTML = pad(parseInt(dateDiffMinPub));
+  } else if (totalSeconds % 3600 === 0) {
+    dateDiffHoursPub = parseInt(dateDiffHoursPub) + 1;
+    hoursLabel.innerHTML = pad(parseInt(dateDiffHoursPub));
+  }
+}
+
+function loadTransectionStatus() {
+  let user_id = userId;
+  let obj_user_id = { user_id };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getActiveTransections`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_user_id),
+    success: function (res) {
+      if (res.success === 1) {
+        let state = res.data.transectionstate;
+        if (state == "START") {
+          let timeStart = new Date(res.data.created_at)
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
+          timeStart = new Date(timeStart);
+          let dateNow = new Date();
+          let diff = dateNow.getTime() - timeStart.getTime();
+          let dateDiffSec = diff / 1000;
+          let dateDiffMin = diff / 60 / 1000;
+          let dateDiffHours = diff / 3600 / 1000;
+
+          dateDiffMinPub =
+            Math.floor(dateDiffMin) - 60 * Math.floor(dateDiffHours);
+          dateDiffHoursPub = Math.floor(dateDiffHours);
+
+          hoursLabel.innerHTML = pad(dateDiffHoursPub);
+          minutesLabel.innerHTML = pad(dateDiffMinPub);
+
+          //for public var //
+          ev_chargepoint_name = res.data.cp_id;
+          connectorId = res.data.connecter_id;
+          idTag = res.data.id_tag;
+          connector_pk_pub = res.data.connecter_pk;
+          transactionId = res.data.transection_pk;
+
+          document.getElementById("scan_station").style.display = "none";
+          document.getElementById("scan_page").style.display = "none";
+          document.getElementById("step_station").style.display = "block";
+
+          move();
+          setInterval(move, 1000);
+
+          calltransectionLoadState(connector_pk_pub);
+
+          checkFinish();
+          blinkStart = setInterval(function () {
+            checkFinish();
+          }, 600000);
+
+          $("#startChargeBtn").prop("disabled", true);
+          $("#startChargeBtn").hide();
+          $("#stopChargeBtn").show();
+
+          clearInterval(blink);
+
+          $(".blink").stop(true, true).fadeToggle(0);
+          $(".blink").hide();
+
+          blinkStart = setInterval(function () {
+            $(".blinkStart").fadeToggle();
+          }, 100);
+
+          getActiveChargeData(transactionId);
+          //  เรียกทุกๆ 3 นาที
+          getActive = setInterval(function () {
+            getActiveChargeData(transactionId);
+          }, 180000);
+
+          timer_count_start_charge = setInterval(setTime, 1000);
+
+          var indx = 2;
+          for (i = 0; i < indx; i++) {
+            stepsFormGoNext.steps("next");
+          }
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ERROR`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function calltransectionLoadState(connector_pk) {
+  let dataObj = {
+    connector_pk,
+    ev_chargepoint_name,
+  };
+
+  obj_status = {
+    connector_pk,
+    ev_chargepoint_name,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getStatusConnecter`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(dataObj),
+    success: function (res) {
+      if (res.success === 1) {
+        $("#ev_description").html(
+          '<span class="float-end text-primary fw-bold" id="">' +
+            res.data.description +
+            "</span></p>"
+        );
+
+        $("#ev_description_charge").html(
+          '<span class="float-end text-primary fw-bold" id="">' +
+            res.data.description +
+            "</span></p>"
+        );
+
+        $("#ev_description_sum").html(
+          '<span class="float-end text-primary fw-bold" id="">' +
+            res.data.description +
+            "</span></p>"
+        );
+
+        $("#ev_cp").html(
+          '<span class="float-end text-primary fw-bold" id="">' +
+            ev_chargepoint_name +
+            " #" +
+            res.data.connector_id +
+            "</span></p>"
+        );
+
+        $("#ev_cp_charge").html(
+          '<span class="float-end text-primary fw-bold" id="">' +
+            ev_chargepoint_name +
+            " #" +
+            res.data.connector_id +
+            "</span></p>"
+        );
+
+        $("#ev_cp_sum").html(
+          '<span class="float-end text-primary fw-bold" id="">' +
+            ev_chargepoint_name +
+            " #" +
+            res.data.connector_id +
+            "</span></p>"
+        );
+     
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `${res.message}`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+  // stepsFormGoNext.steps("next");
+}
+
+function summaryCharger(transactionId) {
+
+  let state_start = "START";
+
+  obj_finish = {
+    transactionId,
+    state_start,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getTransectionsFinish`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_finish),
+    success: function (res) {
+      if (res.success === 1) {
+        let timeStart;
+        let timeStop;
+        for (let index = 0; index < res.data.length; index++) {
+          let state = res.data[index].transectionstate;
+          if (state == "START") {
+            timeStart = new Date(res.data[index].created_at)
+              .toISOString()
+              .slice(0, 19)
+              .replace("T", " ");
+            timeStart = new Date(timeStart);
+          } else {
+            timeStop = new Date(res.data[index].created_at)
+              .toISOString()
+              .slice(0, 19)
+              .replace("T", " ");
+            timeStop = new Date(timeStop);
+          }
+        }
+
+        let diff = timeStop.getTime() - timeStart.getTime();
+        // let dateDiffSec = diff / 1000;
+        let dateDiffMin = diff / 60 / 1000;
+        // let dateDiffHours = diff / 3600 / 1000;
+
+        // dateDiffMinPub =
+        //   Math.floor(dateDiffMin) - 60 * Math.floor(dateDiffHours);
+        // dateDiffHoursPub = Math.floor(dateDiffHours);
+
+        $("#ev_sumtime").html(
+          '<span class="float-end text-primary fw-bold" id="ev_sumtime">' +
+            Math.floor(dateDiffMin) +
+            "  Minute" +
+            "</span></p>"
+        );
+
+        $("#ev_date_start").html(
+          '<span class="float-end text-primary fw-bold" id="ev_date_start">' +
+            new Date(timeStart).toLocaleString() +
+            " " +
+            "</span></p>"
+        );
+
+        getActiveChargeData(transactionId);
+
+        var indx = 3;
+        for (i = 0; i < indx; i++) {
+          stepsFormGoNext.steps("next");
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ERROR NOT NETWORK`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function checkFinish() {
+  let obj_status_check = {
+    connector_pk_pub,
+  };
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getStatusConnecterFinish`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status_check),
+    success: function (res) {
+      if (res.success === 1) {
+        if (
+          res.data.status == "Finishing" ||
+          res.data.status == "SuspendedEV"
+        ) {
+          clearInterval(checkFinishStatus);
+          transection_state("STOP");
+          summaryCharger(transactionId);
+        } else {
+          console.log("null");
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `${res.message}`,
           timer: "2000",
           heightAuto: false,
         });

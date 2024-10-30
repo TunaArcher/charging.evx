@@ -719,6 +719,121 @@ class Evx
         }
     }
 
+    public function getActiveChecgerData($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getActiveChecgerData';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'transaction_pk' => $evx['transaction_pk'],
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getActiveTransections($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getActiveTransections';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    'user_id' => $evx['user_id'],
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getTransectionsFinish($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getTransectionsFinish';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    "transactionId" =>  $evx['transactionId'],
+                    "state" =>  $evx['state']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function getStatusConnecterFinish($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getConnectorFinish';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    "connector_pk" =>  $evx['connector_pk']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    
+
     /*********************************************************************
      * 6. Booking ...
      */

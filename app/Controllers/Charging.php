@@ -292,7 +292,7 @@ class Charging extends BaseController
             $transection_pk = $requestPayload->transactionId ?? null;
             $connecter_pk = $requestPayload->connector_pk_pub ?? null;
 
-            $response = $this->evxApi->transection_state(
+            $response_state = $this->evxApi->transection_state(
                 [
                     "type" => $type,
                     "user_id" => $user_id,
@@ -306,14 +306,183 @@ class Charging extends BaseController
                 ]
             );
 
+            if ($response_state) {
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+                $response['data'] = [];
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
 
-            if ($response) {
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+
+    public function getActiveChecgerData()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
+
+            $requestPayload = $this->request->getJSON();
+            $transaction_pk = $requestPayload->transaction_pk ?? null;
+
+
+            if (!$transaction_pk) throw new \Exception('กรุณาตรวจสอบ CP ID');
+
+            $data_charger = $this->evxApi->getActiveChecgerData(
+                [
+                    'transaction_pk' => $transaction_pk,
+                ]
+            );
+
+            if ($data_charger) {
 
                 $status = 200;
                 $response['success'] = 1;
                 $response['message'] = 'พบสถานะ';
 
-                $response['data'] = [];
+                $response['data'] = $data_charger;
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+
+    public function getActiveTransections()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
+
+            $requestPayload = $this->request->getJSON();
+            $user_id = $requestPayload->user_id ?? null;
+
+
+            if (!$user_id) throw new \Exception('กรุณาตรวจสอบ USER ID');
+
+            $data_charger = $this->evxApi->getActiveTransections(
+                [
+                    'user_id' => $user_id,
+                ]
+            );
+
+            if ($data_charger) {
+
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+
+                $response['data'] = $data_charger;
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+
+    public function getTransectionsFinish()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
+
+            $requestPayload = $this->request->getJSON();
+            $transactionId = $requestPayload->transactionId ?? null;
+            $state = $requestPayload->state_start ?? null;
+
+
+            if (!$transactionId || !$state) throw new \Exception('กรุณาตรวจสอบ  parameter');
+
+            $data_charger = $this->evxApi->getTransectionsFinish(
+                [
+                    'transactionId' => $transactionId,
+                    'state' => $state
+                ]
+            );
+
+            if ($data_charger) {
+
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+
+                $response['data'] = $data_charger;
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }  
+    public function getStatusConnecterFinish()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            if ($this->request->getMethod() != 'post') throw new \Exception('Invalid Credentials.');
+
+            $requestPayload = $this->request->getJSON();
+            $connector_pk = $requestPayload->connector_pk_pub ?? null;
+          
+            if (!$connector_pk) throw new \Exception('กรุณาตรวจสอบ  parameter');
+
+            $connector_status = $this->evxApi->getStatusConnecterFinish(
+                [
+                    'connector_pk' => $connector_pk
+                ]
+            );
+
+            if ($connector_status) {
+
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+
+                $response['data'] = $connector_status;
             } else {
                 $status = 200;
                 $response['success'] = 0;
