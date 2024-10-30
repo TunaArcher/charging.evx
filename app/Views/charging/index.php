@@ -125,7 +125,7 @@
 
                                             </div>
                                             <h3 class="text-center mt-3 text-warning blink" id="showConnectorPlugText">Please plug the connector into your car !!</h3>
-                                            <h3 class="text-center mt-3  text-success blinkStart" id="showConnectorPlugTextStart"  style="display: none;">Your car is charge !!</h3>
+                                            <h3 class="text-center mt-3  text-success blinkStart" id="showConnectorPlugTextStart" style="display: none;">Your car is charge !!</h3>
                                         </div>
                                         <div class="card-footer text-center">
                                             <button type="button" class="btn btn-secondary btn-lg" id="startChargeBtn" style="" disabled="">Start charging</button>
@@ -145,7 +145,7 @@
                                             <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description_charge"> XXXX</span></p>
                                             <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp_charge"> XXXXX #XX</span></p>
                                             <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (11.0 kW)</span></p>
-                                            <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold" id='ev_service_price_chaging'>XX THB/h</span></p>
                                         </div>
                                     </div>
                                     <div class="card-body border mb-2">
@@ -160,8 +160,7 @@
                                                         <path d="M10 11h4"></path>
                                                     </svg>
                                                 </div>
-                                                <h6 class="fw-normal fs-3 mb-1">Total Battery</h6>
-                                                <h4 class="mb-2 d-flex align-items-center justify-content-center gap-1">20 %
+                                                <h6 class="fw-normal fs-3 mb-1">CHARGING</h6>                                 
                                                 </h4>
                                             </div>
                                             <div class="col-lg-4 col-md-12 mb-1 text-lg-end">
@@ -193,11 +192,17 @@
                                                 <div class="card-body">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <h4 class="fs-7">120</h4>
-                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                            <h4 class="fs-7"><span id="hours">00</span>:<span id="minutes">00</span></h4>
+                                                            <h6 class="fw-medium text-info mb-0">Time (hh:mm)</h6>
                                                         </div>
                                                         <span class="text-info display-6">
-                                                            <i class="ti ti-file-text"></i>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock-hour-2">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                                                                <path d="M12 12l3 -2"></path>
+                                                                <path d="M12 7v5"></path>
+                                                            </svg>
+
                                                         </span>
                                                     </div>
                                                 </div>
@@ -208,11 +213,14 @@
                                                 <div class="card-body">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <h4 class="fs-7">120</h4>
-                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                            <h4 class="fs-7" id="powerActive_id">0.0</h4>
+                                                            <h6 class="fw-medium text-info mb-0">Power (kW)</h6>
                                                         </div>
                                                         <span class="text-info display-6">
-                                                            <i class="ti ti-file-text"></i>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bolt">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
+                                                            </svg>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -223,11 +231,17 @@
                                                 <div class="card-body">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <h4 class="fs-7">120</h4>
-                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                            <h4 class="fs-7" id="energyActive_id">0.0</h4>
+                                                            <h6 class="fw-medium text-info mb-0">Energy (kWh)</h6>
                                                         </div>
                                                         <span class="text-info display-6">
-                                                            <i class="ti ti-file-text"></i>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-battery-3">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                <path d="M6 7h11a2 2 0 0 1 2 2v.5a.5 .5 0 0 0 .5 .5a.5 .5 0 0 1 .5 .5v3a.5 .5 0 0 1 -.5 .5a.5 .5 0 0 0 -.5 .5v.5a2 2 0 0 1 -2 2h-11a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2"></path>
+                                                                <path d="M7 10l0 4"></path>
+                                                                <path d="M10 10l0 4"></path>
+                                                                <path d="M13 10l0 4"></path>
+                                                            </svg>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -238,16 +252,24 @@
                                                 <div class="card-body">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div>
-                                                            <h4 class="fs-7">120</h4>
-                                                            <h6 class="fw-medium text-info mb-0">News Feed</h6>
+                                                            <h4 class="fs-7" id="serviceActive_id">0.0</h4>
+                                                            <h6 class="fw-medium text-info mb-0" id="serviceActive_monetary_unit_id">Service xx/kWh</h6>
                                                         </div>
                                                         <span class="text-info display-6">
-                                                            <i class="ti ti-file-text"></i>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-coins">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z"></path>
+                                                                <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4"></path>
+                                                                <path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z"></path>
+                                                                <path d="M3 6v10c0 .888 .772 1.45 2 2"></path>
+                                                                <path d="M3 11c0 .888 .772 1.45 2 2"></path>
+                                                            </svg>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -262,20 +284,20 @@
                                             <p class="m-0 small">Station : <span class="float-end text-primary fw-bold" id="ev_description_sum"> XXXX</span></p>
                                             <p class="m-0 small">Charge point : <span class="float-end text-primary fw-bold" id="ev_cp_sum"> XXXXX #XX</span></p>
                                             <p class="m-0 small mt-1 mb-1">Connector : <span class="float-end text-primary fw-bold"><img src="https://geonine.io/evpublic/connector/4.png" style="width: 1.5rem; padding: 0px; margin-top: -0.2rem;"> AC Type 2 (11.0 kW)</span></p>
-                                            <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold">XX THB/h</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Service Charge : <span class="float-end text-primary fw-bold" id="ev_service_price_sum">XX THB/h</span></p>
                                         </div>
                                     </div>
                                     <div class="card-body mb-2">
                                         <p class="text-center mb-1 mb-md-3 small ">Charging information</p>
                                         <div id="infoDiv">
-                                            <p class="m-0 small">Date : <span class="float-end text-primary fw-bold" id="ev_description"> date time</span></p>
-                                            <p class="m-0 small">Period : <span class="float-end text-primary fw-bold" id="ev_cp"> XXX Minute</span></p>
-                                            <p class="m-0 small mt-1 mb-1">Unit : <span class="float-end text-primary fw-bold"> XXX kWh</span></p>
+                                            <p class="m-0 small">Date : <span class="float-end text-primary fw-bold" id="ev_date_start"> date time</span></p>
+                                            <p class="m-0 small">Period : <span class="float-end text-primary fw-bold" id="ev_sumtime"> XXX Minute</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Unit : <span class="float-end text-primary fw-bold" id="ev_sumUnit"> XXX kWh</span></p>
                                         </div>
                                     </div>
                                     <div class="card-footer mb-2">
                                         <div id="infoDiv">
-                                            <p class="m-0 small mt-1 mb-1">Total Price : <span class="float-end text-primary fw-bold"> XXX THB</span></p>
+                                            <p class="m-0 small mt-1 mb-1">Total Price : <span class="float-end text-primary fw-bold" id="ev_sumPrice"> XXX THB</span></p>
                                         </div>
                                     </div>
                                     <div class="card mb-2">
