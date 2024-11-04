@@ -65,17 +65,15 @@ stepsFormGoNext = $(".tab-charger").steps({
     $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
   },
   onStepChanged: function (event, current, next) {
-    if (current > 1 && current <  3) {
+    if (current > 1 && current < 3) {
       $(".actions > ul > li:first-child").attr("style", "");
       // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
-    }else {
+    } else {
       $(".actions > ul > li:first-child").attr("style", "display:none");
       // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
     }
   },
-  onFinished: function (event, currentIndex) {
-      
-  },
+  onFinished: function (event, currentIndex) {},
 });
 
 $("#click-scan").click(function () {
@@ -307,7 +305,8 @@ function clickSelectConnector(connector_pk) {
             '<span class="float-end text-primary fw-bold" id="">' +
               price_Kw +
               " " +
-              monetary_unit + "/h"+
+              monetary_unit +
+              "/h" +
               "</span></p>"
           );
 
@@ -315,11 +314,10 @@ function clickSelectConnector(connector_pk) {
             '<span class="float-end text-primary fw-bold" id="">' +
               price_Kw +
               " " +
-              monetary_unit + "/h"+
+              monetary_unit +
+              "/h" +
               "</span></p>"
           );
-
-          
 
           blink = setInterval(function () {
             $(".blink").fadeToggle();
@@ -392,16 +390,19 @@ $("#startChargeBtn").click(function () {
   swal.fire({
     title: "",
     text: "Loading...",
-    didOpen: () => {
+    onBeforeOpen() {
       Swal.showLoading();
     },
-    didClose: () => {
+    onAfterClose() {
       Swal.hideLoading();
     },
-    timer: 7500,
+    // timer: 7500,
     showConfirmButton: false,
     showCancelButton: false,
-    //icon: "success"
+    //icon: "success",
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
   });
 
   chargePointSelectList = "JSON;" + ev_chargepoint_name + ";-";
@@ -422,8 +423,8 @@ $("#startChargeBtn").click(function () {
     success: function (response) {
       if (response) {
         if (response) {
-          wait(8000);
-          afterRemoteStart();
+          // afterRemoteStart();
+          checkStartStatus();
         }
       }
     },
@@ -531,16 +532,19 @@ $("#stopChargeBtn").click(function () {
   swal.fire({
     title: "",
     text: "Loading...",
-    didOpen: () => {
+    onBeforeOpen() {
       Swal.showLoading();
     },
-    didClose: () => {
+    onAfterClose() {
       Swal.hideLoading();
     },
-    timer: 17000,
+    // timer: 7500,
     showConfirmButton: false,
     showCancelButton: false,
-    //icon: "success"
+    //icon: "success",
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
   });
 
   beforeRemoteStop(transactionId);
@@ -564,8 +568,7 @@ function beforeRemoteStop(id_transection_pk) {
     success: function (response) {
       if (response) {
         if (response) {
-          wait(16000);
-          afterRemoteStop();
+          checkStopStatus();
           let state = "STOP";
           transection_state(state);
         }
@@ -578,55 +581,22 @@ function beforeRemoteStop(id_transection_pk) {
 }
 
 function afterRemoteStop() {
-  $.ajax({
-    type: "POST",
-    url: `${serverUrl}/charging/getStatusConnecter`,
-    contentType: "application/json; charset=utf-8;",
-    processData: false,
-    data: JSON.stringify(obj_status),
-    success: function (res) {
-      if (res.success === 1) {
-        if (res.data.status == "Finishing" || res.data.status == "Available") {
-          $("#startChargeBtn").prop("disabled", false);
-          $("#startChargeBtn").show();
-          $("#stopChargeBtn").hide();
+  $("#startChargeBtn").prop("disabled", false);
+  $("#startChargeBtn").show();
+  $("#stopChargeBtn").hide();
 
-          clearInterval(blinkStart);
-          clearInterval(getActive);
-          clearInterval(timer_count_start_charge);
-          $(".blinkStart").stop(true, true).fadeToggle(0);
-          $(".blinkStart").hide();
+  clearInterval(blinkStart);
+  clearInterval(getActive);
+  clearInterval(timer_count_start_charge);
+  $(".blinkStart").stop(true, true).fadeToggle(0);
+  $(".blinkStart").hide();
 
-          blink = setInterval(function () {
-            $(".blink").fadeToggle();
-          }, 100);
+  blink = setInterval(function () {
+    $(".blink").fadeToggle();
+  }, 100);
 
-          clearInterval(checkFinishStatus);
-          summaryCharger(transactionId);
-        } else {
-          $("#startChargeBtn").prop("disabled", true);
-          $("#stopChargeBtn").show();
-          $("#startChargeBtn").hide();
-          Swal.fire({
-            icon: "warning",
-            text: `หยุดการชาร์จไม่สำเร็จ`,
-            timer: "2000",
-            heightAuto: false,
-          });
-        }
-      } else {
-        Swal.fire({
-          icon: "warning",
-          text: ``,
-          timer: "2000",
-          heightAuto: false,
-        });
-      }
-    },
-    error: function (res) {
-      console.log(res);
-    },
-  });
+  clearInterval(checkFinishStatus);
+  summaryCharger(transactionId);
 }
 
 function transection_state(state) {
@@ -715,11 +685,17 @@ function getActiveChargeData(transaction_pk) {
             );
 
             $("#serviceActive_id").html(
-              '<h4 class="fs-7" id="serviceActive_id">'+  dataEnergyActive *  price_Kw + '</h4>' 
+              '<h4 class="fs-7" id="serviceActive_id">' +
+                dataEnergyActive * price_Kw +
+                "</h4>"
             );
-    
+
             $("#serviceActive_monetary_unit_id").html(
-              '<h6 class="fw-medium text-info mb-0" id="serviceActive_monetary_unit_id">Service' + price_Kw + '/kWh</h6>' 
+              '<h6 class="fw-medium text-info mb-0" id="serviceActive_monetary_unit_id">Service  ' +
+                price_Kw +
+                "" +
+                monetary_unit +
+                "/kWh</h6>"
             );
           }
         }
@@ -916,7 +892,6 @@ function calltransectionLoadState(connector_pk) {
             res.data.connector_id +
             "</span></p>"
         );
-     
       } else {
         Swal.fire({
           icon: "warning",
@@ -934,7 +909,6 @@ function calltransectionLoadState(connector_pk) {
 }
 
 function summaryCharger(transactionId) {
-
   let state_start = "START";
 
   obj_finish = {
@@ -1039,6 +1013,66 @@ function checkFinish() {
         Swal.fire({
           icon: "warning",
           text: `${res.message}`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function checkStartStatus() {
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getStatusConnecter`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status),
+    success: function (res) {
+      if (res.success === 1) {
+        if (res.data.status == "Charging" || res.data.status == "SuspendedEV") {
+          afterRemoteStart();
+          Swal.close();
+        } else {
+          checkStartStatus();
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: ``,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function checkStopStatus() {
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/getStatusConnecter`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status),
+    success: function (res) {
+      if (res.success === 1) {
+        if (res.data.status == "Finishing" || res.data.status == "Available") {
+          afterRemoteStop();
+          Swal.close();
+        } else {
+          checkStopStatus();
+        }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: ``,
           timer: "2000",
           heightAuto: false,
         });
