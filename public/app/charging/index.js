@@ -67,7 +67,7 @@ stepsFormGoNext = $(".tab-charger").steps({
   onStepChanged: function (event, current, next) {
     if (current > 1 && current < 3) {
       $(".actions > ul > li:first-child").attr("style", "");
-      // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
+      $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
     } else {
       $(".actions > ul > li:first-child").attr("style", "display:none");
       // $(".actions > ul > li:nth-child(2)").attr("style", "display:none");
