@@ -16,7 +16,7 @@ function loadPriceKWh() {
         price_Kw = res.data.price_Kw;
         monetary_unit = res.data.monetary_unit;
         $("#oldPriceId").val(res.data.id);
-        $("#oldPriceKWh").val(parseFloat(price_Kw));
+        $("#oldPriceKWh").val(price_Kw * 1); 
         $("#oldPriceKUnit").val(monetary_unit);
       } else {
         Swal.fire({
