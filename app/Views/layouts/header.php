@@ -169,7 +169,12 @@
                                         บัญชีผู้ใช้งาน
                                     </a>
                                 </li>
-
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="<?php echo base_url('/charging/indexPriceSetting'); ?>" aria-expanded="false">
+                                        <iconify-icon icon="solar:chat-round-money-broken"></iconify-icon>
+                                        ตั้งค่าราคาบริการ
+                                    </a>
+                                </li>
                                 <li>
                                     <span class="sidebar-divider"></span>
                                 </li>

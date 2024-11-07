@@ -35,8 +35,8 @@ function wait(ms) {
 var totalSeconds = 0;
 var dateDiffMinPub = 0;
 var dateDiffHoursPub = 0;
-var price_Kw = 10;
-var monetary_unit = "THB";
+var price_Kw = 0;
+var monetary_unit;
 var blink;
 var blinkStart;
 var getActive;
@@ -298,15 +298,6 @@ function clickSelectConnector(connector_pk) {
               ev_chargepoint_name +
               " #" +
               res.data.connector_id +
-              "</span></p>"
-          );
-
-          $("#ev_service_price_sum").html(
-            '<span class="float-end text-primary fw-bold" id="">' +
-              price_Kw +
-              " " +
-              monetary_unit +
-              "/h" +
               "</span></p>"
           );
 
@@ -663,7 +654,7 @@ function getActiveChargeData(transaction_pk) {
             }
             $("#powerActive_id").html(
               '<h4 class="fs-7" id="powerActive_id">' +
-                dataPowerActive +
+                parseFloat(dataPowerActive).toFixed(2) +
                 "</h4>"
             );
           } else {
@@ -673,20 +664,28 @@ function getActiveChargeData(transaction_pk) {
             }
             $("#energyActive_id").html(
               '<h4 class="fs-7" id="energyActive_id">' +
-                dataEnergyActive +
+                parseFloat(dataEnergyActive).toFixed(2) +
                 "</h4>"
             );
 
             $("#ev_sumUnit").html(
-              '<span class="float-end text-primary fw-bold" id="energyActive_id">' +
-                dataEnergyActive +
+              '<span class="float-end text-primary fw-bold" id="ev_sumUnit">' +
+                parseFloat(dataEnergyActive).toFixed(2) +
                 " kWh" +
                 "</span>"
             );
 
+            $("#ev_sumPrice").html(
+              '<span class="float-end text-primary fw-bold" id="ev_sumPrice">' +
+                (dataEnergyActive * price_Kw).toFixed(2) +
+                " " +
+                monetary_unit +
+                "</span></p>"
+            );
+
             $("#serviceActive_id").html(
               '<h4 class="fs-7" id="serviceActive_id">' +
-                dataEnergyActive * price_Kw +
+                (dataEnergyActive * price_Kw).toFixed(2) +
                 "</h4>"
             );
 
@@ -696,6 +695,33 @@ function getActiveChargeData(transaction_pk) {
                 "" +
                 monetary_unit +
                 "/kWh</h6>"
+            );
+
+            $("#ev_service_price_chaging").html(
+              '<span class="float-end text-primary fw-bold" id="">' +
+                price_Kw +
+                " " +
+                monetary_unit +
+                "/h" +
+                "</span></p>"
+            );
+
+            $("#ev_service_price_chaging").html(
+              '<span class="float-end text-primary fw-bold" id="">' +
+                price_Kw +
+                " " +
+                monetary_unit +
+                "/h" +
+                "</span></p>"
+            );
+
+            $("#ev_service_price_sum").html(
+              '<span class="float-end text-primary fw-bold" id="">' +
+                price_Kw +
+                " " +
+                monetary_unit +
+                "/h" +
+                "</span></p>"
             );
           }
         }
@@ -817,6 +843,29 @@ function loadTransectionStatus() {
             stepsFormGoNext.steps("next");
           }
         }
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ERROR`,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+
+  $.ajax({
+    type: "GET",
+    url: `${serverUrl}/charging/getActivePriceKw`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    success: function (res) {
+      if (res.success === 1) {
+        price_Kw = res.data.price_Kw;
+        monetary_unit = res.data.monetary_unit;
       } else {
         Swal.fire({
           icon: "warning",

@@ -283,6 +283,31 @@ class Evx
         }
     }
 
+    public function getActivePriceKw()
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/getActivePriceKw';
+
+            $response = $this->http->request('GET', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getAllOwnerStations error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
     /*********************************************************************
      * 3. Owner Station | เจ้าของสถานี
      */
@@ -815,6 +840,65 @@ class Evx
                 ],
                 'json' => [
                     "connector_pk" =>  $evx['connector_pk']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function updatePriceKw($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/updatePriceKw';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    "id_price" =>  $evx['id_price'],
+                    "price_Kw" =>  $evx['price_Kw'],
+                    "monetary_unit" =>  $evx['monetary_unit']
+                ]
+            ]);
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return $data->data;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::getConnectorSteve error {message}', ['message' => 'message:' . $e->getMessage()]);
+
+            return false;
+        }
+    }
+
+    public function insertPriceKw($evx)
+    {
+        try {
+            $endPoint = $this->baseURL . '/ev_station/addnewPriceKw';
+
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [
+                    "price_Kw" =>  $evx['price_Kw'],
+                    "monetary_unit" =>  $evx['monetary_unit']
                 ]
             ]);
 
