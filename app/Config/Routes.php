@@ -69,6 +69,7 @@ $routes->group('booking', ['filter' => 'userAuth'], function ($routes) {
 // Charging
 $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->get('index', 'Charging::index');
+    $routes->get('getActivePriceKw', 'Charging::getActivePriceKw');
     $routes->post('GetStation', 'Charging::getEVStation');
     $routes->post('getConnecter', 'Charging::getEVStationConnector');  
     $routes->post('getStatusConnecter', 'Charging::getEVStationConnectorStatus');
@@ -80,6 +81,9 @@ $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->post('getActiveTransections', 'Charging::getActiveTransections');
     $routes->post('getTransectionsFinish', 'Charging::getTransectionsFinish');  
     $routes->post('getStatusConnecterFinish', 'Charging::getStatusConnecterFinish');  
+    $routes->get('indexPriceSetting', 'Charging::indexPriceSetting');   
+    $routes->post('updatePriceKw', 'Charging::updatePriceKw');   
+    $routes->post('insertPriceKw', 'Charging::insertPriceKw');
 });
 
 // Profile

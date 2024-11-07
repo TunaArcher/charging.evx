@@ -455,7 +455,7 @@ class Charging extends BaseController
         } catch (\Exception $e) {
             echo $e->getMessage() . ' ' . $e->getLine();
         }
-    }  
+    }
     public function getStatusConnecterFinish()
     {
         try {
@@ -467,7 +467,7 @@ class Charging extends BaseController
 
             $requestPayload = $this->request->getJSON();
             $connector_pk = $requestPayload->connector_pk_pub ?? null;
-          
+
             if (!$connector_pk) throw new \Exception('กรุณาตรวจสอบ  parameter');
 
             $connector_status = $this->evxApi->getStatusConnecterFinish(
@@ -487,6 +487,138 @@ class Charging extends BaseController
                 $status = 200;
                 $response['success'] = 0;
                 $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+
+    public function getActivePriceKw()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            $active_priceKw = $this->evxApi->getActivePriceKw();
+
+            if ($active_priceKw) {
+
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'พบสถานะ';
+
+                $response['data'] = $active_priceKw;
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'หัวชาร์จไม่ว่าง';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+
+    public function indexPriceSetting()
+    {
+        $data['content'] = 'charging/indexPrice';
+        $data['title'] = 'Charging';
+        $data['css_critical'] = '
+        <link rel="stylesheet" href="../assets/libs/connectors.css" />
+        ';
+        $data['js_critical'] = ' 
+            <script src="' . base_url('/assets/js/vendor.min.js') . '"></script>
+            <script src="' . base_url('/assets/libs/jquery-steps/build/jquery.steps.min.js') . '"></script>
+            <script src="' . base_url('/assets/libs/jquery-validation/dist/jquery.validate.min.js') . '"></script>
+            <script src="' . base_url('/assets/libs/simplebar/dist/simplebar.min.js') . '"></script>
+            <script src="' . base_url('/assets/js/forms/form-wizard.js') . '"></script>
+            <script src="' . base_url('/assets/js/apps/ecommerce.js') . '"></script>  
+            <script src="' . base_url('/assets/js/html5-qrcode.min.js') . '"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+            <script src="' . base_url('/app/charging/priceSetings.js?v=' . time()) . '"></script>
+        ';
+        echo view('/app', $data);
+    }
+
+    public function updatePriceKw()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            $requestPayload = $this->request->getJSON();
+            $id_price = $requestPayload->id_price ?? null;
+            $price_Kw = $requestPayload->price_Kw ?? null;
+            $monetary_unit = $requestPayload->monetary_unit ?? null;
+
+
+            $response_state = $this->evxApi->updatePriceKw(
+                [
+                    "id_price" => $id_price,
+                    "price_Kw" => $price_Kw,
+                    "monetary_unit" => $monetary_unit,
+                ]
+            );
+
+            if ($response_state) {
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'แก้ไขสำเร็จ';
+                $response['data'] = [];
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'แก้ไขไม่สำเร็จ';
+            }
+
+            return $this->response
+                ->setStatusCode($status)
+                ->setContentType('application/json')
+                ->setJSON($response);
+        } catch (\Exception $e) {
+            echo $e->getMessage() . ' ' . $e->getLine();
+        }
+    }
+    public function insertPriceKw()
+    {
+        try {
+            $status = 500;
+            $response['success'] = 0;
+            $response['message'] = '';
+
+            $requestPayload = $this->request->getJSON();
+            $price_Kw = $requestPayload->price_Kw ?? null;
+            $monetary_unit = $requestPayload->monetary_unit ?? null;
+
+
+            $response_state = $this->evxApi->insertPriceKw(
+                [
+                    "price_Kw" => $price_Kw,
+                    "monetary_unit" => $monetary_unit,
+                ]
+            );
+
+            if ($response_state) {
+                $status = 200;
+                $response['success'] = 1;
+                $response['message'] = 'แก้ไขสำเร็จ';
+                $response['data'] = [];
+            } else {
+                $status = 200;
+                $response['success'] = 0;
+                $response['message'] = 'แก้ไขไม่สำเร็จ';
             }
 
             return $this->response
