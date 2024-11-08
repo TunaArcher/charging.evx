@@ -37,6 +37,8 @@ var dateDiffMinPub = 0;
 var dateDiffHoursPub = 0;
 var price_Kw = 0;
 var monetary_unit;
+var sum_price;
+var sum_Kw;
 var blink;
 var blinkStart;
 var getActive;
@@ -731,6 +733,9 @@ function getActiveChargeData(transaction_pk) {
                 "/h" +
                 "</span></p>"
             );
+
+            sum_price = parseFloat(dataEnergyActive * price_Kw).toFixed(2);
+            sum_Kw = parseFloat(dataEnergyActive).toFixed(2);
           }
         }
       } else {
@@ -1024,6 +1029,8 @@ function summaryCharger(transactionId) {
         );
 
         getActiveChargeData(transactionId);
+        ///save in summary user
+        summaryChargerUser();
 
         var indx = 3;
         for (i = 0; i < indx; i++) {
@@ -1130,6 +1137,44 @@ function checkStopStatus() {
         Swal.fire({
           icon: "warning",
           text: ``,
+          timer: "2000",
+          heightAuto: false,
+        });
+      }
+    },
+    error: function (res) {
+      console.log(res);
+    },
+  });
+}
+
+function summaryChargerUser() {
+  let credit = 0.0;
+  let obj_status = {
+    userId,
+    sum_price,
+    sum_Kw,
+    credit,
+    ev_chargepoint_name,
+    connectorId,
+    idTag,
+    transactionId,
+    connector_pk_pub,
+    monetary_unit,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: `${serverUrl}/charging/summaryChargerUser`,
+    contentType: "application/json; charset=utf-8;",
+    processData: false,
+    data: JSON.stringify(obj_status),
+    success: function (res) {
+      if (res.success === 1) {
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: `ERROR`,
           timer: "2000",
           heightAuto: false,
         });

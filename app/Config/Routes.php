@@ -84,6 +84,7 @@ $routes->group('charging', ['filter' => 'userAuth'], function ($routes) {
     $routes->get('indexPriceSetting', 'Charging::indexPriceSetting');   
     $routes->post('updatePriceKw', 'Charging::updatePriceKw');   
     $routes->post('insertPriceKw', 'Charging::insertPriceKw');
+    $routes->post('summaryChargerUser', 'Charging::summaryChargerUser');
 });
 
 // Profile
