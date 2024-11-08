@@ -47,7 +47,7 @@
                                                     <div class="mb-3" id="update-danger">
                                                         <label class="form-label">ราคา (/h)</label>
                                                         <input type="hidden" class="form-control" id="oldPriceId" placeholder="" name="oldPriceId" >
-                                                        <input type="text" class="form-control" id="oldPriceKWh" placeholder="" name="oldPriceKWh" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')" onkeypress="clearClassDanger('update-danger');">
+                                                        <input type="number" class="form-control" id="oldPriceKWh" placeholder="" name="oldPriceKWh"  pattern="/^-?\d+\.?\d*$/" onkeypress="clearClassDanger('update-danger');">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
@@ -74,7 +74,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="mb-3" id="save-danger">
                                                         <label class="form-label">ราคา (/h)</label>
-                                                        <input type="text" class="form-control" id="NewPriceKWh" placeholder="" name="NewPriceKWh" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')" onkeypress="clearClassDanger('save-danger');">
+                                                        <input type="number" class="form-control" id="NewPriceKWh" placeholder="" name="NewPriceKWh"  pattern="/^-?\d+\.?\d*$/" onkeypress="clearClassDanger('save-danger');">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
