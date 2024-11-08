@@ -206,11 +206,15 @@ function getConnectByChargePoint(ev_cp) {
             res.data[index].connector_id +
             "</p>" +
             '<p class="mb-1">AC Type ' +
-            res.data[index].connector_id +
+            "2" +
             "   (11.0 kW)</p>" +
             '<img src="https://geonine.io/evpublic/connector/4.png" style="width: 100%; max-width: 80px;">' +
             '<p class="m-0">' +
-            "Service Charge: XX THB/kWh" +
+            "Service Charge: " +
+            price_Kw +
+            " " +
+            monetary_unit +
+            "/kWh" +
             "</p>" +
             "</div>" +
             "</div>" +
@@ -258,7 +262,11 @@ function clickSelectConnector(connector_pk) {
     data: JSON.stringify(dataObj),
     success: function (res) {
       if (res.success === 1) {
-        if (res.data.status != "Charging" && res.data.status != "Unavailable") {
+        if (
+          res.data.status != "Charging" &&
+          res.data.status != "Unavailable" &&
+          res.data.status != "Available"
+        ) {
           $("#ev_description").html(
             '<span class="float-end text-primary fw-bold" id="">' +
               res.data.description +
@@ -864,7 +872,7 @@ function loadTransectionStatus() {
     processData: false,
     success: function (res) {
       if (res.success === 1) {
-        price_Kw = res.data.price_Kw;
+        price_Kw = parseFloat(res.data.price_Kw).toFixed(2);
         monetary_unit = res.data.monetary_unit;
       } else {
         Swal.fire({
