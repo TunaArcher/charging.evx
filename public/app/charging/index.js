@@ -37,8 +37,8 @@ var dateDiffMinPub = 0;
 var dateDiffHoursPub = 0;
 var price_Kw = 0;
 var monetary_unit;
-var sum_price;
-var sum_Kw;
+var sum_price = 0;
+var sum_Kw = 0;
 var blink;
 var blinkStart;
 var getActive;
@@ -672,6 +672,12 @@ function getActiveChargeData(transaction_pk) {
             if (dataEnergyActive == null) {
               dataEnergyActive = 0;
             }
+
+            sum_price =
+              parseFloat(dataEnergyActive).toFixed(2) *
+              parseFloat(price_Kw).toFixed(2);
+            sum_Kw = parseFloat(dataEnergyActive).toFixed(2);
+
             $("#energyActive_id").html(
               '<h4 class="fs-7" id="energyActive_id">' +
                 parseFloat(dataEnergyActive).toFixed(2) +
@@ -733,9 +739,6 @@ function getActiveChargeData(transaction_pk) {
                 "/h" +
                 "</span></p>"
             );
-
-            sum_price = parseFloat(dataEnergyActive * price_Kw).toFixed(2);
-            sum_Kw = parseFloat(dataEnergyActive).toFixed(2);
           }
         }
       } else {
@@ -1029,8 +1032,10 @@ function summaryCharger(transactionId) {
         );
 
         getActiveChargeData(transactionId);
-        ///save in summary user
-        summaryChargerUser();
+        
+        setTimeout(function () {
+          summaryChargerUser();
+        }, 2000);
 
         var indx = 3;
         for (i = 0; i < indx; i++) {
