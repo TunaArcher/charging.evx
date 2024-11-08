@@ -914,6 +914,44 @@ class Evx
 
             return false;
         }
+    } 
+    public function summaryChargerUser($evx)
+    {
+        try {
+
+            $endPoint = $this->baseURL . '/ev_station/summaryChargerUser';
+
+            // TODO:: HANDLE
+            $response = $this->http->request('POST', $endPoint, [
+                'headers' => [
+                    'Authorization' => "Bearer " . $this->accessToken
+                ],
+                'json' => [               
+                    "user_id" => $evx['user_id'],
+                    "sum_price" => $evx['sum_price'],
+                    "sum_Kw" => $evx['sum_Kw'],
+                    "credit" => $evx['credit'],                
+                    "cp_id" => $evx['cp_id'],
+                    "connecter_id" => $evx['connecter_id'],
+                    "id_tag" => $evx['id_tag'],
+                    "transection_pk" => $evx['transection_pk'],
+                    "connecter_pk" => $evx['connecter_pk'],
+                    "country" => $evx['country']
+                ]
+            ]);
+
+
+            $data = json_decode($response->getBody());
+
+            $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+
+            if ($statusCode === 0 || $statusCode === 200) return true;
+
+            return false;
+        } catch (\Exception $e) {
+            log_message('error', 'EVX::updateChargePoint error {message}', ['message' => 'message:' . $e->getMessage()]);
+            return false;
+        }
     }
 
     
