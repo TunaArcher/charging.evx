@@ -936,7 +936,8 @@ class Evx
                     "id_tag" => $evx['id_tag'],
                     "transection_pk" => $evx['transection_pk'],
                     "connecter_pk" => $evx['connecter_pk'],
-                    "country" => $evx['country']
+                    "country" => $evx['country'],
+                    "sum_min" => $evx['sum_min']
                 ]
             ]);
 

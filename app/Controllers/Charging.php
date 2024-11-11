@@ -628,7 +628,7 @@ class Charging extends BaseController
         } catch (\Exception $e) {
             echo $e->getMessage() . ' ' . $e->getLine();
         }
-    }   
+    }
     public function summaryChargerUser()
     {
 
@@ -638,7 +638,7 @@ class Charging extends BaseController
             $response['message'] = '';
 
             $requestPayload = $this->request->getJSON();
-            $user_id = $requestPayload->userId ?? null;  
+            $user_id = $requestPayload->userId ?? null;
             $sum_price = $requestPayload->sum_price ?? null;
             $sum_Kw = $requestPayload->sum_Kw ?? null;
             $credit = $requestPayload->credit ?? null;
@@ -648,6 +648,7 @@ class Charging extends BaseController
             $transection_pk = $requestPayload->transactionId ?? null;
             $connecter_pk = $requestPayload->connector_pk_pub ?? null;
             $country = $requestPayload->monetary_unit ?? null;
+            $sum_min = $requestPayload->sum_min ?? null;
 
             $response_sum = $this->evxApi->summaryChargerUser(
                 [
@@ -660,7 +661,8 @@ class Charging extends BaseController
                     "id_tag" => $id_tag,
                     "transection_pk" => $transection_pk,
                     "connecter_pk" => $connecter_pk,
-                    "country" => $country
+                    "country" => $country,
+                    "sum_min" => $sum_min,
                 ]
             );
 

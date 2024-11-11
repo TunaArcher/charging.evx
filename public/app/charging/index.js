@@ -39,6 +39,7 @@ var price_Kw = 0;
 var monetary_unit;
 var sum_price = 0;
 var sum_Kw = 0;
+var sum_min;
 var blink;
 var blinkStart;
 var getActive;
@@ -1024,6 +1025,8 @@ function summaryCharger(transactionId) {
             "</span></p>"
         );
 
+        sum_min =  Math.floor(dateDiffMin);
+
         $("#ev_date_start").html(
           '<span class="float-end text-primary fw-bold" id="ev_date_start">' +
             new Date(timeStart).toLocaleString() +
@@ -1166,6 +1169,7 @@ function summaryChargerUser() {
     transactionId,
     connector_pk_pub,
     monetary_unit,
+    sum_min,
   };
 
   $.ajax({
