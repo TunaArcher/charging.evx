@@ -1130,4 +1130,34 @@ class Evx
      */
 
     // TODO:: HANDLE
+
+    
+    /*********************************************************************
+     * 11. Map | แผนที่ รายละเอียดแผนที่
+     */
+
+     public function getEvStationDetailMap()
+     {
+         try {
+             $endPoint = $this->baseURL . '/map/getEvStationDetailMap';
+ 
+             $response = $this->http->request('GET', $endPoint, [
+                 'headers' => [
+                     'Authorization' => "Bearer " . $this->accessToken
+                 ],
+             ]);
+ 
+             $data = json_decode($response->getBody());
+ 
+             $statusCode = isset($data->statusCode) ? (int) $data->statusCode : false;
+ 
+             if ($statusCode === 0 || $statusCode === 200) return $data->data;
+ 
+             return false;
+         } catch (\Exception $e) {
+             log_message('error', 'EVX::getAllChargePoints error {message}', ['message' => 'message:' . $e->getMessage()]);
+ 
+             return false;
+         }
+     }
 }

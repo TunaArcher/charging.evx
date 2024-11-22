@@ -235,11 +235,11 @@
 <div class="body-wrapper">
     <div class="position-relative">
         <div class="position-relative" style="border: none; height: calc(100vh - 129px) !important;">
-            <input id="pac-input" class="controls mt-1 p-1 h-95" type="text" placeholder="Search places" />
+            <input id="location-input" class="controls mt-1 p-2 h-95 ml-1" type="text" placeholder="Search places" />
             <div id="map"></div>
         </div>
 
-        <div id="divSearch" class="position-absolute bottom-0 end-0 popup-form" style="display: none; margin-bottom: 23px; margin-right: 52px;">
+        <!-- <div id="divSearch" class="position-absolute bottom-0 end-0 popup-form" style="display: none; margin-bottom: 23px; margin-right: 52px;">
             <div class="text-end">
                 <button class="btn btn-sm btn-close-popup" data-popup-target="divSearch" type="button"><i class="fas fa-times"></i></button>
             </div>
@@ -336,7 +336,7 @@
                 <div class="col-12 pb-1 status-container mini" data-status="4">ปิด</div>
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 </div>
